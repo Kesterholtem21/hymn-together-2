@@ -8,11 +8,12 @@
 import Foundation
 import CommonCrypto
 
-struct HymnSingModel : Decodable {
+struct HymnSingModel : Decodable, Encodable, Identifiable {
+    var id: String = ""
+    var personId: String = ""
     var name: String = ""
     var lead: String = ""
     var description: String = ""
     var longitude: Double = 0.0
     var latitude: Double = 0.0
-    var email: String = ""
 }

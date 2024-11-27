@@ -95,6 +95,7 @@ struct OnboardingView : View {
         ZStack {
             TabView(selection: $selectionIndex) {
                 OnboardingViewDetails(color: Color(.blue).opacity(0.8), headline: "Explore Hymns", icon: "music.note", subheadline: "Listen and get lyrics for a variety of hymns").tag(0)
+                OnboardingViewDetails(color: Color(.purple).opacity(0.8), headline: "Explore Popular Hymns", icon: "chart.line.uptrend.xyaxis", subheadline: "Explore Hymns people are saving").tag(0)
                 OnboardingViewDetails(color: Color(.red).opacity(0.8), headline: "Explore Hymn Sings", icon: "music.note.house", subheadline: "Sing hymns together with friends and family").tag(1)
                 OnboardingViewDetails(color: Color(.orange).opacity(0.8), headline: "Community of People", icon: "person.fill", subheadline: "Find other people who share your interests").tag(2)
                 OnboardingSignup().tag(3)

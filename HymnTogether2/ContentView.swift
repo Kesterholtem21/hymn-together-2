@@ -11,6 +11,7 @@ struct ContentView: View {
     @AppStorage("id") var id: String = ""
     @State var needsOnboarding: Bool = false
     @EnvironmentObject var personVM: PersonViewModel
+    @EnvironmentObject var hymnSingVM: HymnSingViewModel
     @EnvironmentObject var peopleVM: PeopleViewModel
 
     var body: some View {
@@ -56,6 +57,8 @@ struct ContentView: View {
             if !needsOnboarding {
                 personVM.getPerson(id: id)
                 peopleVM.getPeople()
+                hymnSingVM.getHymnSings()
+                hymnSingVM.getPersonHymnSings(person: personVM.person)
             }
         }
     }
@@ -65,5 +68,6 @@ struct ContentView: View {
     ContentView()
         .environmentObject(HymnViewModel())
         .environmentObject(PeopleViewModel())
+        .environmentObject(HymnSingViewModel())
         .environmentObject(PersonViewModel())
 }

@@ -60,15 +60,4 @@ class PersonViewModel : ObservableObject {
             }
         }
     }
-    
-    func getHymnSings() {
-        self.loading = true
-        Task {
-            let hymnSigns = await BackendService.getPersonHymnSings(person: person)
-            await MainActor.run {
-                self.hymnSings = hymnSigns
-                self.loading = false
-            }
-        }
-    }
 }
