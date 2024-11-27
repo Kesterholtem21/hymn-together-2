@@ -15,7 +15,7 @@ private struct OnboardingViewDetails: View {
     
     var body: some View {
         ZStack {
-            Color(color)
+            Rectangle().fill(color.gradient)
             VStack(spacing: 0) {
                 Spacer()
                 VStack(alignment: .center, spacing: 15) {
