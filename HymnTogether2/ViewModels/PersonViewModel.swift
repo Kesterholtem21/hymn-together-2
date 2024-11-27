@@ -9,14 +9,21 @@ import Foundation
 
 class PersonViewModel : ObservableObject {
     @Published var person: PersonModel = PersonModel()
-    @Published var following: [PersonModel] = [PersonModel]()
     @Published var hymnSings: [HymnSingModel] = [HymnSingModel]()
+    @Published var loading: Bool = false
+    
+    private func delay() async {
+        try? await Task.sleep(nanoseconds: 500_000_000)
+    }
     
     func getPerson(id: String) {
+        self.loading = true
         Task {
             let person = await BackendService.getPerson(id: id)
+            await delay()
             await MainActor.run {
                 self.person = person
+                self.loading = false
             }
         }
     }
@@ -36,6 +43,9 @@ class PersonViewModel : ObservableObject {
         self.person = person
         Task {
             await BackendService.putPerson(person: person)
+            await MainActor.run {
+                self.person = person
+            }
         }
     }
     
@@ -45,27 +55,19 @@ class PersonViewModel : ObservableObject {
         self.person = person
         Task {
             await BackendService.putPerson(person: person)
-        }
-    }
-    
-    func getFollowing() {
-        let following = self.person.following
-        Task {
-            let people = await BackendService.getPeople()
-            let filterPeople = people.filter {
-                following.contains($0.id)
-            }
             await MainActor.run {
-                self.following = filterPeople
+                self.person = person
             }
         }
     }
     
     func getHymnSings() {
+        self.loading = true
         Task {
             let hymnSigns = await BackendService.getPersonHymnSings(person: person)
             await MainActor.run {
                 self.hymnSings = hymnSigns
+                self.loading = false
             }
         }
     }

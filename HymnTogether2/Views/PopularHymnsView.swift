@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct PopularHymnsView: View {
+    @EnvironmentObject var personVM: PersonViewModel
+    @EnvironmentObject var hymnVM: HymnViewModel
+    @EnvironmentObject var peopleVM: PeopleViewModel
+    @State var searchTerm: String = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        let popularHymns = hymnVM.getPopularHymns(people: peopleVM.people)
+        
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 15) {
+                    ForEach(popularHymns) { popularHymn in
+                        PopularHymnCard(popularHymn: popularHymn)
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .navigationTitle("Popular Hymns")
+            .searchable(text: $searchTerm).cornerRadius(16.0)
+            .navigationTitle("Hymns")
+            .navigationBarItems(
+                leading: PersonAvatar(person: personVM.person, diameter: 25.0)
+            )
+        }
     }
 }
 
 #Preview {
     PopularHymnsView()
+        .environmentObject(PersonViewModel())
+        .environmentObject(HymnViewModel())
+        .environmentObject(PeopleViewModel())
 }

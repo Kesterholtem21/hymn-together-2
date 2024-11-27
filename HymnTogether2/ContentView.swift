@@ -8,48 +8,56 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var selection = 1
     @AppStorage("id") var id: String = ""
+    @State var needsOnboarding: Bool = false
     @EnvironmentObject var personVM: PersonViewModel
-    
+    @EnvironmentObject var peopleVM: PeopleViewModel
+
     var body: some View {
-        @State var needsOnboarding = id.isEmpty
-        
-        TabView(selection: $selection) {
-            HymnListView().tabItem {
+        ZStack {
+            if personVM.loading || peopleVM.loading {
                 VStack {
-                    Image(systemName: "music.note")
-                    Text("Hymns")
+                    Spacer()
+                    Spinner()
+                    Spacer()
                 }
-            }.tag(1)
-            HymnSingView().tabItem {
-                VStack {
-                    Image(systemName: "music.note.house")
-                    Text("Hymn Sings")
-                }
-            }.tag(2)
-            PeopleView().tabItem {
-                VStack {
-                    Image(systemName: "person.fill")
-                    Text("People")
-                }
-            }.tag(4)
-            FollowingView().tabItem {
-                VStack {
-                    Image(systemName: "person.3.fill")
-                    Text("Following")
-                }
-            }.tag(5)
-        }.fullScreenCover(isPresented: $needsOnboarding) {
-            needsOnboarding = false
-        } content: {
-            OnboardingView()
+            } else {
+                TabView {
+                    HymnListView().tabItem {
+                        VStack {
+                            Image(systemName: "music.note")
+                            Text("Hymns")
+                        }
+                    }
+                    PopularHymnsView().tabItem {
+                        VStack {
+                            Image(systemName: "chart.line.uptrend.xyaxis")
+                            Text("Popular")
+                        }
+                    }
+                    HymnSingView().tabItem {
+                        VStack {
+                            Image(systemName: "music.note.house")
+                            Text("Hymn Sings")
+                        }
+                    }
+                    PeopleView().tabItem {
+                        VStack {
+                            Image(systemName: "person.fill")
+                            Text("People")
+                        }
+                    }
+                }.fullScreenCover(isPresented: $needsOnboarding) {
+                    OnboardingView()
+                }.tint(.black)
+            }
         }.onAppear {
-            if (!needsOnboarding) {
+            needsOnboarding = !id.isEmpty
+            if !needsOnboarding {
                 personVM.getPerson(id: id)
+                peopleVM.getPeople()
             }
         }
-        .tint(.black)
     }
 }
 

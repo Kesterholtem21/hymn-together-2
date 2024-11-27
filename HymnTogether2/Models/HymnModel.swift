@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct HymnModel : Decodable {
+struct HymnModel : Decodable, Identifiable {
     var id: Int = 0
     var title: String = ""
     var author: String = ""

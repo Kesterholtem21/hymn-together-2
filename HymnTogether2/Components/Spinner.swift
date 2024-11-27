@@ -9,7 +9,11 @@ import SwiftUI
 
 struct Spinner: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .black))
+            Text("Loading...")
+        }
     }
 }
 

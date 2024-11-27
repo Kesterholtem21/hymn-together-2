@@ -38,4 +38,22 @@ class HymnViewModel : ObservableObject {
         }
         return filteredHymns
     }
+    
+    func getPopularHymns(people: [PersonModel]) -> [PopularHymnModel] {
+        var hymnIds = Set<Int>()
+        var savedHymns: [Int: Int] = [:]
+        people.forEach { person in
+            person.savedHymns.forEach { hymnId in
+                if let count = savedHymns[hymnId] {
+                    savedHymns[hymnId] = count + 1
+                } else {
+                    savedHymns[hymnId] = 1
+                }
+            }
+        }
+        let popularHymns = hymns.map { hymn in
+            PopularHymnModel(hymn: hymn, saves: savedHymns[hymn.id] ?? 0)
+        }.sorted { $0.saves > $1.saves }
+        return popularHymns
+    }
 }

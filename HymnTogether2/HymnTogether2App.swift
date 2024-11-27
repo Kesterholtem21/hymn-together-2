@@ -12,6 +12,9 @@ struct HymnTogether2App: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(HymnViewModel())
+                .environmentObject(PersonViewModel())
+                .environmentObject(PeopleViewModel())
         }
     }
 }

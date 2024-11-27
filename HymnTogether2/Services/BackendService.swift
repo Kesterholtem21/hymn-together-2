@@ -11,6 +11,7 @@ class BackendService {
     private static let API_KEY = "6732662c2a1b1a4ae10fdb5c"
     
     static func getPerson(id: String) async -> PersonModel {
+        print(id)
         if let url = URL(string: "https://\(self.API_KEY).mockapi.io/People?id=\(id)"){
             let request = URLRequest(url: url)
             do{
@@ -38,16 +39,17 @@ class BackendService {
     
     static func getPeople() async -> [PersonModel] {
         if let url = URL(string: "https://\(self.API_KEY).mockapi.io/People"){
+            print("ran getPeople")
             let request = URLRequest(url: url)
             do{
                 let (data, response) = try await URLSession.shared.data(for: request)
                 if let httpResponse = response as? HTTPURLResponse{
                     let statusCode = httpResponse.statusCode
                     if statusCode == 200 {
-                        do{
+                        do {
                             let jsonResponse = try JSONDecoder().decode([PersonModel].self, from: data)
                             return jsonResponse
-                        }catch{
+                        } catch {
                             print(error)
                         }
                     }else{

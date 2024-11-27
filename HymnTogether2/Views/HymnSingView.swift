@@ -10,6 +10,7 @@ import SwiftUI
 struct HymnSingView: View {
     @EnvironmentObject var personVM: PersonViewModel
     @State var searchText: String = ""
+    @State var presentAdd: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -31,12 +32,16 @@ struct HymnSingView: View {
                 .searchable(text: $searchText)
                 .navigationBarItems(
                     leading: PersonAvatar(person: personVM.person, diameter: 25.0),
-                    trailing: HStack(spacing: 15) {
-                        Image(systemName: "map")
-                        Image(systemName: "plus")
-                    }
+                    trailing:
+                        NavigationLink {
+                            AddHymnSingView()
+                        } label: {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundStyle(.black)
+                        }
                 )
-            
         }
     }
 }

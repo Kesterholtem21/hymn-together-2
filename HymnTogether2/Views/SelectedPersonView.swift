@@ -7,11 +7,31 @@
 
 import SwiftUI
 
+struct SelectedPersonSavedHymns : View {
+    let savedHymns: [HymnModel]
+    
+    var body : some View {
+        VStack(alignment: .leading, spacing: 15) {
+            ForEach(savedHymns) { hymn in
+                HymnCard(hymn: hymn)
+            }
+        }
+    }
+}
+
+struct SelectedPersonHymnSings : View {
+    var body : some View {
+        VStack(alignment: .leading, spacing: 15) {
+        }
+    }
+}
+
 struct SelectedPersonView: View {
     @State var isPresented: Bool = false
     @EnvironmentObject var hymnVM: HymnViewModel
     @EnvironmentObject var personVM: PersonViewModel
-    @State var followers = 0
+    @State var selection: Int = 0
+    @State var followers: Int = 0
     let person: PersonModel
     
     var body: some View {
@@ -26,37 +46,25 @@ struct SelectedPersonView: View {
                     AsyncImage(url: URL(string: person.avatar))
                         .frame(width: 70.0, height: 70.0)
                         .cornerRadius(.infinity)
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(person.name).font(.title).bold()
-                        HStack(spacing: 10) {
-                            Text("\(followers) \(followers == 1 ? "Follower" : "Followers")")
-                            if person.id != personVM.person.id {
-                                FollowButton(followers: $followers, person: person)
-                            }
-                        }
-                    }
+                    Text(person.name).font(.title).bold()
                     Spacer()
                 }
-                VStack(alignment: .leading, spacing: 15) {
-                    Text("Bio").font(.title2).bold()
+                if !person.bio.isEmpty {
                     Text(person.bio)
                 }
-                VStack(alignment: .leading, spacing: 15) {
-                    Text("Saved Hymns").font(.title2).bold()
-                    ForEach(0..<savedHymns.count, id: \.self) { index in
-                        let hymn = savedHymns[index]
-                        HymnCard(hymn: hymn)
-                    }
+                VStack {
+                    Picker("Selection", selection: $selection) {
+                        Text("Saved Hymns").tag(0)
+                        Text("Hymn Sings").tag(1)
+                    }.pickerStyle(.segmented)
                 }
-                VStack(alignment: .leading, spacing: 15) {
-                    Text("Hymn Sings").font(.title2).bold()
+                if selection == 0 {
+                    SelectedPersonSavedHymns(savedHymns: savedHymns)
+                } else if selection == 1 {
+                    SelectedPersonHymnSings()
                 }
             }
-        }
-        .padding(.horizontal)
-        .onAppear {
-            self.followers = person.followers
-        }
+        }.padding(.horizontal)
     }
 }
 

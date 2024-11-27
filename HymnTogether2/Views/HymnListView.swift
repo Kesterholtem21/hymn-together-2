@@ -23,13 +23,11 @@ struct HymnListView: View {
             ScrollView {
                 LazyVStack(spacing: 15) {
                     if (searchResults.count > 0) {
-                        ForEach(0..<searchResults.count, id: \.self) { index in
-                            let hymn = searchResults[index]
+                        ForEach(searchResults) { hymn in
                             HymnCard(hymn: hymn)
                         }
                     } else {
-                        ForEach(0..<hymnVM.hymns.count, id: \.self) { index in
-                            let hymn = hymns[index]
+                        ForEach(hymnVM.hymns) { hymn in
                             HymnCard(hymn: hymn)
                         }
                     }
