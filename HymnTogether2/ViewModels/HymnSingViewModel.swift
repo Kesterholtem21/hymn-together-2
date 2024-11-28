@@ -30,10 +30,10 @@ class HymnSingViewModel : ObservableObject {
         }
     }
     
-    func getPersonHymnSings(person: PersonModel) {
+    func getPersonHymnSings(id: String) {
         self.loading = true
         Task {
-            let personHymnSings = await BackendService.getPersonHymnSings(person: person)
+            let personHymnSings = await BackendService.getPersonHymnSings(id: id)
             await MainActor.run {
                 self.personHymnSings = personHymnSings
                 self.loading = false

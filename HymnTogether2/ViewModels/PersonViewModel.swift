@@ -28,15 +28,6 @@ class PersonViewModel : ObservableObject {
         }
     }
     
-    func postPerson(person: PersonModel) {
-        Task {
-            let personReturned = await BackendService.postPerson(person: person)
-            await MainActor.run {
-                self.person = personReturned
-            }
-        }
-    }
-    
     func putSaveHymn(hymn: HymnModel) {
         let id = hymn.id
         person.savedHymns.append(id)

@@ -26,7 +26,7 @@ class BackendService {
                             print(error)
                         }
                     }else{
-                        print("statusCode: \(statusCode)")
+                        print("getPerson statusCode: \(statusCode)")
                     }
                 }
             } catch {
@@ -53,7 +53,7 @@ class BackendService {
                             print(error)
                         }
                     }else{
-                        print("statusCode: \(statusCode)")
+                        print("getPeople statusCode: \(statusCode)")
                     }
                 }
             } catch {
@@ -94,7 +94,7 @@ class BackendService {
                         print(error)
                     }
                 }else{
-                    print("statusCode: \(statusCode)")
+                    print("getHymnSings statusCode: \(statusCode)")
                 }
             }
         } catch {
@@ -116,8 +116,10 @@ class BackendService {
         }
     }
     
-    static func getPersonHymnSings(person: PersonModel) async -> [HymnSingModel] {
-        let url = URL(string: "https://\(self.API_KEY).mockapi.io/People/\(person.id)/HymnSings")!
+    static func getPersonHymnSings(id: String) async -> [HymnSingModel] {
+        
+        let url = URL(string: "https://\(self.API_KEY).mockapi.io/People/\(id)/HymnSings")!
+        print(url.path())
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         do {
@@ -132,7 +134,7 @@ class BackendService {
                         print(error)
                     }
                 }else{
-                    print("statusCode: \(statusCode)")
+                    print("getPersonHymnSings statusCode: \(statusCode)")
                 }
             }
         } catch {

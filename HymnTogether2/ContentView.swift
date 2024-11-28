@@ -49,12 +49,13 @@ struct ContentView: View {
                 }.tint(.black)
             }
         }.onAppear {
-            needsOnboarding = !id.isEmpty
-            if !needsOnboarding {
+            if !id.isEmpty {
                 personVM.getPerson(id: id)
                 peopleVM.getPeople()
                 hymnSingVM.getHymnSings()
-                hymnSingVM.getPersonHymnSings(person: personVM.person)
+                hymnSingVM.getPersonHymnSings(id: id)
+            } else {
+                needsOnboarding = true
             }
         }
     }
