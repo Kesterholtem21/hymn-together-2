@@ -55,5 +55,5 @@ struct HymnSingCard: View {
 }
 
 #Preview {
-    HymnSingCard(hymnSing: HymnSingModel(name: "Name",lead: "Liam Grossman", description: "Description", email: "Liam.j.grossman@gmail.com"))
+    HymnSingCard(hymnSing: HymnSingModel())
 }

@@ -17,11 +17,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if personVM.loading || peopleVM.loading {
-                VStack {
-                    Spacer()
-                    Spinner()
-                    Spacer()
-                }
+                LoadingView()
             } else {
                 TabView {
                     HymnListView().tabItem {

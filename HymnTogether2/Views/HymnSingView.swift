@@ -18,13 +18,13 @@ struct HymnSingView: View {
                 VStack(spacing: 15) {
                     HymnSingCard(hymnSing: HymnSingModel(
                         name: "Test",
-                        lead: "Lead", description: "Description", email: "Liam.j.grossman@gmail.com"))
+                        lead: "Lead", description: "Description"))
                     HymnSingCard(hymnSing: HymnSingModel(
                         name: "Test",
-                        lead: "Lead", description: "Description", email: "Liam.j.grossman@gmail.com"))
+                        lead: "Lead", description: "Description"))
                     HymnSingCard(hymnSing: HymnSingModel(
                         name: "Test",
-                        lead: "Lead", description: "Description", email: "Liam.j.grossman@gmail.com"))
+                        lead: "Lead", description: "Description"))
 
                 }.padding(.bottom)
             }.padding(.horizontal)

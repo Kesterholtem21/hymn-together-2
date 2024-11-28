@@ -24,6 +24,12 @@ class HymnSingViewModel : ObservableObject {
         }
     }
     
+    func postHymnSing(hymnSing: HymnSingModel) {
+        Task {
+            await BackendService.postHymnSing(hymnSing: hymnSing)
+        }
+    }
+    
     func getPersonHymnSings(person: PersonModel) {
         self.loading = true
         Task {
