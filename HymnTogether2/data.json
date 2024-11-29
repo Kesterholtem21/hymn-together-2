@@ -1,6 +1,6 @@
 [
   {
-      "id": 1,
+    "id": 1,
     "title": "Abide With Me",
     "author": "Henry Francis Lyte",
     "score": "https://hymnary.org/media/fetch/142382",
@@ -39,7 +39,7 @@
     ]
   },
   {
-      "id": 2,
+    "id": 2,
     "title": "Alas and Did My Savior Bleed",
     "author": "Isaac Watts",
     "score": "https://hymnary.org/media/fetch/137184",
@@ -78,7 +78,7 @@
     ]
   },
   {
-      "id": 3,
+    "id": 3,
     "title": "All Hail The Power of Jesus Name",
     "score": "https://hymnary.org/media/fetch/96177",
     "author": "Edward Perronet",
@@ -115,6 +115,169 @@
         "and crown him Lord of all.",
         "We'll join the everlasting song",
         "and crown him Lord of all."
+      ]
+    ]
+  },
+  {
+    "id": 4,
+    "title": "All Praise to Thee My God This Night",
+    "author": "Thomas Ken",
+    "score": "https://hymnary.org/media/fetch/137282",
+    "music": "https://static1.squarespace.com/static/594c2a87d482e915c4aa15cc/5d863b5b47101b6c86945dbe/5d863ba74f6640459436b050/1587613147852/All+Praise+to+Thee+My+God+This+Night+-+Piano+Only.mp3",
+    "lyrics": [
+      [
+        "All praise to You, my God, this night,",
+        "For all the blessings of the light.",
+        "Keep me, O keep me, King of kings,",
+        "Beneath the shelter of Your wings."
+      ],
+      [
+        "Forgive me, Lord, for this I pray,",
+        "The wrong that I have done this day.",
+        "May peace with God and neighbor be,",
+        "Before I sleep restored to me."
+      ],
+      [
+        "Lord, may I be at rest in You",
+        "And sweetly sleep the whole night thro'.",
+        "Refresh my strength, for Your own sake,",
+        "So I may serve You when I wake."
+      ],
+      [
+        "Praise God, from whom all blessings flow;",
+        "Praise Him all creatures here below;",
+        "Praise Him above, ye heav'nly host;",
+        "Praise Father, Son, and Holy Ghost."
+      ]
+    ]
+  },
+  {
+    "id": 5,
+    "music": "https://static1.squarespace.com/static/594c2a87d482e915c4aa15cc/5d863b5b47101b6c86945dbe/5d863bace7a89537826cb7f6/1587613152218/Allelujah+Sing+To+Jesus+-+Piano+Only.mp3",
+    "title": "Allelujah Sing To Jesus",
+    "author": "W. Chatterton Dix",
+    "score": "https://hymnary.org/media/fetch/97582",
+    "lyrics": [
+      [
+        "Alleluia! Sing to Jesus;",
+        "His the scepter, His the throne.",
+        "Alleluia! His the triumph,",
+        "His the victory alone.",
+        "Hark! The songs of peaceful Zion",
+        "thunder like a mighty flood:",
+        "\"Jesus out of every nation",
+        "has redeemed us by His blood.\""
+      ],
+      [
+        "Alleluia! Not as orphans",
+        "are we left in sorrow now.",
+        "Alleluia! He is near us;",
+        "faith believes, nor questions how.",
+        "Tho' the cloud from sight received Him",
+        "when the forty days were o'er,",
+        "shall our hearts forget His promise,",
+        "\"I am with you evermore\"?"
+      ],
+      [
+        "Alleluia! Bread of heaven,",
+        "here on earth our food, our stay.",
+        "Alleluia! Here the sinful",
+        "flee to You from day to day.",
+        "Intercessor, Friend of sinners,",
+        "earth's Redeemer, hear our plea",
+        "where the songs of all the sinless",
+        "sweep across the crystal sea."
+      ]
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Awake My Soul and With The Sun",
+    "author": "Thomas Ken",
+    "music": "https://static1.squarespace.com/static/594c2a87d482e915c4aa15cc/5d863b5b47101b6c86945dbe/5d863bb468af8823781743df/1587613182066/Awake+My+Soul+and+With+The+Sun+-+Piano+Only.mp3",
+    "lyrics": [
+      [
+        "Awake, my soul, and with the sun",
+        "thy daily stage of duty run;",
+        "shake off dull sloth, and early rise",
+        "to pay thy morning sacrifice."
+      ],
+      [
+        "Lord, I my vows to Thee renew.",
+        "Disperse my sins as morning dew;",
+        "guard my first springs of thought and will;",
+        "and with Thyself my spirit fill."
+      ],
+      [
+        "Direct, control, suggest, this day,",
+        "all I design or do or say,",
+        "that all my pow'rs, with all their might,",
+        "in Thy sole glory may unite."
+      ],
+      [
+        "Praise God, from whom all blessings flow;",
+        "praise Him all creatures here below;",
+        "praise Him above, ye heav'enly host;",
+        "praise Father, Son, and Holy Ghost."
+      ]
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Beautiful Savior",
+    "music": "https://static1.squarespace.com/static/594c2a87d482e915c4aa15cc/5d863b5b47101b6c86945dbe/5d863bdde7a89537826cbaa4/1587613186861/Beautiful+Savior+-+Piano+Only.mp3",
+    "score": "https://hymnary.org/media/fetch/96168",
+    "author": "Joseph Augustus Seiss",
+    "lyrics": [
+      [
+        "Beautiful Savior, King of creation,",
+        "Son of God and Son of Man!",
+        "Truly I'd love Thee, truly I'd serve Thee,",
+        "Light of my soul, my Joy, my Crown."
+      ],
+      [
+        "Fair are the meadows, Fair are the woodlands,",
+        "Robed in flow'rs of blooming spring;",
+        "Jesus is fairer, Jesus is purer;",
+        "He makes our sorr'wing spirit sing."
+      ],
+      [
+        "Fair is the sunshine, Fair is the moonlight,",
+        "Bright the sparkling stars on high;",
+        "Jesus shines brighter, Jesus shines purer",
+        "Than all the angels in the sky."
+      ],
+      [
+        "Beautiful Savior, Lord of the nations,",
+        "Son of God and Son of Man!",
+        "Glory and honor, Praise, adoration,",
+        "Now and forevermore be Thine!"
+      ]
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Before the Ending of the Day",
+    "author": "St. Ambrose",
+    "music": "https://static1.squarespace.com/static/594c2a87d482e915c4aa15cc/5d863b5b47101b6c86945dbe/5d863bddd4e8684cb874d559/1587613190386/Before+the+Ending+of+the+Day+-+Piano+Only.mp3",
+    "lyrics": [
+      [
+        "Before the ending of the day,",
+        "Creator of the world, we pray.",
+        "Your grace and peace to us allow",
+        "and guard and keep your people now."
+      ],
+      [
+        "From evil dreams defend our sight,",
+        "from all the terrors of the night,",
+        "from all deluding thoughts that creep",
+        "on heedless minds disarmed by sleep."
+      ],
+      [
+        "O Father, this we ask be done",
+        "through Jesus Christ, your only Son,",
+        "whom with the Spirit we adore",
+        "forever and forever more. Amen."
       ]
     ]
   }

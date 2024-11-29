@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ShareButton: View {
-    let hymn: HymnModel
+    let music: String
     var body: some View {
-        ShareLink(item: URL(string: hymn.score)!) {
+        ShareLink(item: URL(string: music)!) {
             Image(systemName: "square.and.arrow.up").foregroundStyle(.black)
         }
     }
 }
 
 #Preview {
-    ShareButton(hymn: HymnModel())
+    ShareButton(music: "https://google.com")
 }

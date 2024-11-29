@@ -1,17 +1,13 @@
-//
-//  HymnCard.swift
-//  HymnTogether
-//
-//  Created by Liam Grossman on 11/11/24.
-//
-
 import SwiftUI
 
 struct HymnCard: View {
     let hymn: HymnModel
     
     var body: some View {
-        let color = hymn.id % 4 == 0 ? Color.green : hymn.id % 3 == 0 ? Color.blue : hymn.id % 2 == 0 ? Color.orange : Color.red
+        // Define an array of colors to rotate through
+        let colors = [Color.red, Color.orange, Color.blue, Color.green]
+        // Select color based on the hymn's ID and the array index
+        let color = colors[hymn.id % colors.count]
         let lyrics = hymn.lyrics.flatMap { $0 }.joined(separator: " ")
         
         NavigationLink {
@@ -28,7 +24,7 @@ struct HymnCard: View {
                             .foregroundColor(.black)
                             .fixedSize(horizontal: false, vertical: true)
                             .rotationEffect(Angle(degrees: 15), anchor: .center)
-                            .opacity(0.2).frame(width: 200.0)
+                            .opacity(0.2).frame(width: 250)
                             .clipped()
                     }.frame(width: 150.0).clipped()
                     VStack(alignment: .leading, spacing: 10) {
@@ -48,5 +44,5 @@ struct HymnCard: View {
 }
 
 #Preview {
-    HymnCard(hymn: HymnModel(title: "Test"))
+    HymnCard(hymn: HymnModel())
 }

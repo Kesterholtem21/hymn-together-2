@@ -64,7 +64,7 @@ struct SelectedHymnView: View {
                         if play {
                             player.play(hymn: hymn)
                             withAnimation {
-                                opacity = 0.35
+                                opacity = 0.5
                             }
                         } else {
                             player.pause(hymn: hymn)
@@ -99,7 +99,7 @@ struct SelectedHymnView: View {
         }
         .ignoresSafeArea()
         .navigationBarItems(
-            trailing: ShareButton(hymn: hymn)
+            trailing: ShareButton(music: hymn.music)
         )
         .onAppear {
             do {
@@ -128,6 +128,6 @@ struct SelectedHymnView: View {
 }
 
 #Preview {
-    SelectedHymnView(hymn: HymnModel(title: "Testing", author: "test"), lyrics: "Lyrics", color: .blue)
+    SelectedHymnView(hymn: HymnModel(title: "Testing", author: "test", music: "https://google.com"), lyrics: "Lyrics", color: .blue)
         .environmentObject(PersonViewModel())
 }

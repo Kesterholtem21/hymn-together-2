@@ -13,6 +13,6 @@ struct HymnModel : Decodable, Identifiable {
     var title: String = ""
     var author: String = ""
     var music: String = ""
-    var score: String = ""
+    var score: String? = nil
     var lyrics: [[String]] = [[]]
 }
