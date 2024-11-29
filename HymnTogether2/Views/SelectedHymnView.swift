@@ -9,14 +9,18 @@ import SwiftUI
 
 struct SelectedHymnView: View {
     let hymn: HymnModel
-    let lyrics: String
-    let color: Color
     
     @State var opacity = 0.2
     @EnvironmentObject var audioPlayerVM: AudioPlayerViewModel
     
     var body: some View {
         let playing = audioPlayerVM.playing && audioPlayerVM.hymnPlaying?.id == hymn.id
+        // Define an array of colors to rotate through
+        let colors = [Color.red, Color.orange, Color.blue, Color.green]
+        // Select color based on the hymn's ID and the array index
+        let color = colors[hymn.id % colors.count]
+        let lyrics = hymn.lyrics.flatMap { $0 }.joined(separator: " ")
+        
         ZStack {
             Rectangle().fill(color.gradient).opacity(opacity)
                 .transition(.opacity) // Optional transition
@@ -62,14 +66,11 @@ struct SelectedHymnView: View {
 
         }
         .ignoresSafeArea()
-        .navigationBarItems(
-            trailing: ShareButton(music: hymn.music)
-        )
     }
 }
 
 #Preview {
-    SelectedHymnView(hymn: HymnModel(title: "Testing", author: "test", music: "https://google.com"), lyrics: "Lyrics", color: .blue)
+    SelectedHymnView(hymn: HymnModel(title: "Testing", author: "test", music: "https://google.com"))
         .environmentObject(PersonViewModel())
         .environmentObject(AudioPlayerViewModel())
 }

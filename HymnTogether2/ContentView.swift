@@ -32,6 +32,12 @@ struct ContentView: View {
                             Text("Popular")
                         }
                     }
+                    RandomView().tabItem {
+                        VStack {
+                            Image(systemName: "arrow.clockwise")
+                            Text("Random")
+                        }
+                    }
                     HymnSingView().tabItem {
                         VStack {
                             Image(systemName: "music.note.house")

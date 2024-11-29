@@ -19,7 +19,10 @@ struct PopularHymnCard: View {
         let color = colors[hymn.id % colors.count]
         let lyrics = hymn.lyrics.flatMap { $0 }.joined(separator: " ")
         NavigationLink {
-            SelectedHymnView(hymn: hymn, lyrics: lyrics, color: color)
+            SelectedHymnView(hymn: hymn)
+            .navigationBarItems(
+                trailing: ShareButton(music: hymn.music)
+            )
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
@@ -46,6 +49,7 @@ struct PopularHymnCard: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 15, height: 15)
+                                .foregroundColor(.black)
                             Text("\(popularHymn.saves)")
                                 .frame(height: 15).font(.caption)
                         }

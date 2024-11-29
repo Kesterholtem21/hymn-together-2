@@ -11,7 +11,10 @@ struct HymnCard: View {
         let lyrics = hymn.lyrics.flatMap { $0 }.joined(separator: " ")
         
         NavigationLink {
-            SelectedHymnView(hymn: hymn, lyrics: lyrics, color: color)
+            SelectedHymnView(hymn: hymn)
+                .navigationBarItems(
+                    trailing: ShareButton(music: hymn.music)
+                )
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
