@@ -14,6 +14,7 @@ struct HymnTogether2App: App {
             ContentView()
                 .environmentObject(HymnViewModel())
                 .environmentObject(PersonViewModel())
+                .environmentObject(HymnSingViewModel())
                 .environmentObject(PeopleViewModel())
         }
     }

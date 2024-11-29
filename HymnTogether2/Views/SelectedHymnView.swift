@@ -8,14 +8,37 @@
 import SwiftUI
 import AVFoundation
 import AVFAudio
+import MediaPlayer
 
-class SoundManager : ObservableObject {
-    var audioPlayer: AVPlayer?
-
-    func playSound(sound: String){
-        if let url = URL(string: sound) {
-            self.audioPlayer = AVPlayer(url: url)
-        }
+class AudioPlayer : ObservableObject {
+    static let shared = AudioPlayer()
+    
+    var player: AVPlayer?
+    
+    func play(hymn: HymnModel) {
+        let url = URL(string: hymn.music)
+        player = AVPlayer(playerItem: AVPlayerItem(url: url!))
+        player?.play()
+        self.updateNowPlayerInfo(hymn: hymn)
+    }
+    
+    private func updateNowPlayerInfo(hymn: HymnModel) {
+        guard let player = player, let currentItem = player.currentItem else { return }
+    
+        let info: [String: Any] = [
+            MPMediaItemPropertyTitle: hymn.title,
+            MPMediaItemPropertyArtist: hymn.author,
+            MPMediaItemPropertyGenre: "Hymns",
+            MPMediaItemPropertyPlaybackDuration: currentItem.duration,
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: player.currentTime().seconds,
+            MPNowPlayingInfoPropertyPlaybackRate: player.rate
+        ]
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+    }
+    
+    func pause(hymn: HymnModel) {
+        player?.pause()
+        updateNowPlayerInfo(hymn: hymn)
     }
 }
 
@@ -26,7 +49,7 @@ struct SelectedHymnView: View {
     
     @State var opacity = 0.2
     @State var play: Bool = false
-    @StateObject private var soundManager = SoundManager()
+    @ObservedObject var player = AudioPlayer.shared
     
     var body: some View {
         ZStack {
@@ -37,16 +60,14 @@ struct SelectedHymnView: View {
                 Spacer()
                 VStack(spacing: 20) {
                     Button {
-                        soundManager.playSound(sound: hymn.music)
                         play.toggle()
-                        
                         if play {
-                            soundManager.audioPlayer?.play()
+                            player.play(hymn: hymn)
                             withAnimation {
                                 opacity = 0.35
                             }
                         } else {
-                            soundManager.audioPlayer?.pause()
+                            player.pause(hymn: hymn)
                             withAnimation {
                                 opacity = 0.2
                             }
@@ -77,6 +98,32 @@ struct SelectedHymnView: View {
 
         }
         .ignoresSafeArea()
+        .navigationBarItems(
+            trailing: ShareButton(hymn: hymn)
+        )
+        .onAppear {
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                try AVAudioSession.sharedInstance().setActive(true)
+                setupRemoteControls()
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    private func setupRemoteControls() {
+        let commands = MPRemoteCommandCenter.shared()
+        
+        commands.pauseCommand.addTarget { _ in
+            player.pause(hymn: hymn)
+            return .success
+        }
+        
+        commands.playCommand.addTarget { _ in
+            player.play(hymn: hymn)
+            return .success
+        }
     }
 }
 

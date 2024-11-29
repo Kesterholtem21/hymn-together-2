@@ -16,7 +16,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            if personVM.loading || peopleVM.loading {
+            if personVM.loading || peopleVM.loading || hymnSingVM.loading {
                 LoadingView()
             } else {
                 TabView {
