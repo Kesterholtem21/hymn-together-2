@@ -6,41 +6,6 @@
 //
 
 import SwiftUI
-import AVFoundation
-import AVFAudio
-import MediaPlayer
-
-class AudioPlayer : ObservableObject {
-    static let shared = AudioPlayer()
-    
-    var player: AVPlayer?
-    
-    func play(hymn: HymnModel) {
-        let url = URL(string: hymn.music)
-        player = AVPlayer(playerItem: AVPlayerItem(url: url!))
-        player?.play()
-        self.updateNowPlayerInfo(hymn: hymn)
-    }
-    
-    private func updateNowPlayerInfo(hymn: HymnModel) {
-        guard let player = player, let currentItem = player.currentItem else { return }
-    
-        let info: [String: Any] = [
-            MPMediaItemPropertyTitle: hymn.title,
-            MPMediaItemPropertyArtist: hymn.author,
-            MPMediaItemPropertyGenre: "Hymns",
-            MPMediaItemPropertyPlaybackDuration: currentItem.duration,
-            MPNowPlayingInfoPropertyElapsedPlaybackTime: player.currentTime().seconds,
-            MPNowPlayingInfoPropertyPlaybackRate: player.rate
-        ]
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = info
-    }
-    
-    func pause(hymn: HymnModel) {
-        player?.pause()
-        updateNowPlayerInfo(hymn: hymn)
-    }
-}
 
 struct SelectedHymnView: View {
     let hymn: HymnModel
@@ -48,10 +13,10 @@ struct SelectedHymnView: View {
     let color: Color
     
     @State var opacity = 0.2
-    @State var play: Bool = false
-    @ObservedObject var player = AudioPlayer.shared
+    @EnvironmentObject var audioPlayerVM: AudioPlayerViewModel
     
     var body: some View {
+        let playing = audioPlayerVM.playing && audioPlayerVM.hymnPlaying?.id == hymn.id
         ZStack {
             Rectangle().fill(color.gradient).opacity(opacity)
                 .transition(.opacity) // Optional transition
@@ -60,16 +25,15 @@ struct SelectedHymnView: View {
                 Spacer()
                 VStack(spacing: 20) {
                     Button {
-                        play.toggle()
-                        if play {
-                            player.play(hymn: hymn)
-                            withAnimation {
-                                opacity = 0.5
-                            }
-                        } else {
-                            player.pause(hymn: hymn)
+                        if playing {
+                            audioPlayerVM.pause()
                             withAnimation {
                                 opacity = 0.2
+                            }
+                        } else {
+                            audioPlayerVM.play(hymn: hymn)
+                            withAnimation {
+                                opacity = 0.5
                             }
                         }
                     } label: {
@@ -82,7 +46,7 @@ struct SelectedHymnView: View {
                                 .rotationEffect(Angle(degrees: 15), anchor: .center)
                                 .opacity(0.2).frame(width: 350)
                             
-                            Image(systemName: play ? "pause.fill" : "play.fill").resizable().frame(width: 35.0, height: 35.0).foregroundColor(.white)
+                            Image(systemName: playing ? "pause.fill" : "play.fill").resizable().frame(width: 35.0, height: 35.0).foregroundColor(.white)
                         }.frame(width: 250, height: 250.0).clipped().cornerRadius(16.0)
                     }
                     VStack(alignment: .center, spacing: 10) {
@@ -101,33 +65,11 @@ struct SelectedHymnView: View {
         .navigationBarItems(
             trailing: ShareButton(music: hymn.music)
         )
-        .onAppear {
-            do {
-                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-                try AVAudioSession.sharedInstance().setActive(true)
-                setupRemoteControls()
-            } catch {
-                print(error)
-            }
-        }
-    }
-    
-    private func setupRemoteControls() {
-        let commands = MPRemoteCommandCenter.shared()
-        
-        commands.pauseCommand.addTarget { _ in
-            player.pause(hymn: hymn)
-            return .success
-        }
-        
-        commands.playCommand.addTarget { _ in
-            player.play(hymn: hymn)
-            return .success
-        }
     }
 }
 
 #Preview {
     SelectedHymnView(hymn: HymnModel(title: "Testing", author: "test", music: "https://google.com"), lyrics: "Lyrics", color: .blue)
         .environmentObject(PersonViewModel())
+        .environmentObject(AudioPlayerViewModel())
 }

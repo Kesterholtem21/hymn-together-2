@@ -36,7 +36,8 @@ struct HymnListView: View {
             .searchable(text: $searchTerm).cornerRadius(16.0)
             .navigationTitle("Hymns")
             .navigationBarItems(
-                leading: PersonAvatar(person: personVM.person, diameter: 25.0)
+                leading: PersonAvatar(person: personVM.person, diameter: 15.0),
+                trailing: AudioControls()
             )
         }
     }
@@ -46,4 +47,5 @@ struct HymnListView: View {
     HymnListView()
         .environmentObject(HymnViewModel())
         .environmentObject(PersonViewModel())
+        .environmentObject(AudioPlayerViewModel())
 }

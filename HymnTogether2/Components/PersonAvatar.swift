@@ -27,5 +27,5 @@ struct PersonAvatar: View {
 }
 
 #Preview {
-    PersonAvatar(person: PersonModel(), diameter: 20.0)
+    PersonAvatar(person: PersonModel(), diameter: 15.0)
 }

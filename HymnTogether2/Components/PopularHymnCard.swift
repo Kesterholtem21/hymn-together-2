@@ -13,9 +13,11 @@ struct PopularHymnCard: View {
     
     var body: some View {
         let hymn = popularHymn.hymn
-        let color = hymn.id % 4 == 0 ? Color.green : hymn.id % 3 == 0 ? Color.blue : hymn.id % 2 == 0 ? Color.orange : Color.red
+        // Define an array of colors to rotate through
+        let colors = [Color.red, Color.orange, Color.blue, Color.green]
+        // Select color based on the hymn's ID and the array index
+        let color = colors[hymn.id % colors.count]
         let lyrics = hymn.lyrics.flatMap { $0 }.joined(separator: " ")
-        
         NavigationLink {
             SelectedHymnView(hymn: hymn, lyrics: lyrics, color: color)
         } label: {
@@ -30,7 +32,7 @@ struct PopularHymnCard: View {
                             .foregroundColor(.black)
                             .fixedSize(horizontal: false, vertical: true)
                             .rotationEffect(Angle(degrees: 15), anchor: .center)
-                            .opacity(0.2).frame(width: 200.0)
+                            .opacity(0.2).frame(width: 250)
                             .clipped()
                     }.frame(width: 150.0).clipped()
                     VStack(alignment: .leading, spacing: 10) {
@@ -45,7 +47,7 @@ struct PopularHymnCard: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 15, height: 15)
                             Text("\(popularHymn.saves)")
-                                .frame(height: 15)
+                                .frame(height: 15).font(.caption)
                         }
                     }.padding().foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .leading) // Aligns text to the left

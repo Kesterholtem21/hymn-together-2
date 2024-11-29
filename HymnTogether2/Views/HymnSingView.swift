@@ -31,15 +31,19 @@ struct HymnSingView: View {
                 .navigationTitle("Hymn Sings")
                 .searchable(text: $searchText)
                 .navigationBarItems(
-                    leading: PersonAvatar(person: personVM.person, diameter: 25.0),
+                    leading: PersonAvatar(person: personVM.person, diameter: 15.0),
                     trailing:
-                        NavigationLink {
-                            AddHymnSingView()
-                        } label: {
-                            Image(systemName: "plus")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundStyle(.black)
+                        HStack(spacing: 10) {
+                            NavigationLink {
+                                AddHymnSingView()
+                            } label: {
+                                Image(systemName: "plus")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15.0, height: 15.0)
+                                    .foregroundStyle(.black)
+                            }
+                            AudioControls()
                         }
                 )
         }
@@ -49,4 +53,5 @@ struct HymnSingView: View {
 #Preview {
     HymnSingView()
         .environmentObject(PersonViewModel())
+        .environmentObject(HymnViewModel())
 }

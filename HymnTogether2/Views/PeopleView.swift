@@ -35,7 +35,8 @@ struct PeopleView: View {
             }.padding(.horizontal)
             .searchable(text: $searchTerm)
             .navigationBarItems(
-                leading: PersonAvatar(person: personVM.person, diameter: 25.0)
+                leading: PersonAvatar(person: personVM.person, diameter: 15.0),
+                trailing: AudioControls()
             )
             .navigationTitle("People")
         }
@@ -47,4 +48,5 @@ struct PeopleView: View {
     PeopleView()
         .environmentObject(PeopleViewModel())
         .environmentObject(PersonViewModel())
+        .environmentObject(AudioPlayerViewModel())
 }

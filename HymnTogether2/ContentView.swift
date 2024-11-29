@@ -67,4 +67,5 @@ struct ContentView: View {
         .environmentObject(PeopleViewModel())
         .environmentObject(HymnSingViewModel())
         .environmentObject(PersonViewModel())
+        .environmentObject(AudioPlayerViewModel())
 }
