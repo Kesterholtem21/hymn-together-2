@@ -30,6 +30,5 @@ class AudioPlayerViewModel : ObservableObject {
     func pause() {
         audioPlayer?.pause()
         playing = false
-        hymnPlaying = nil
     }
 }
