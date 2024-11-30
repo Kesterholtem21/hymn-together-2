@@ -9,24 +9,41 @@ import SwiftUI
 
 struct HymnSingView: View {
     @EnvironmentObject var personVM: PersonViewModel
+    @EnvironmentObject var hymnSingVM: HymnSingViewModel
     @State var searchText: String = ""
     @State var presentAdd: Bool = false
     
     var body: some View {
+        let hymnSings = hymnSingVM.hymnSings.sorted(
+            by:{
+            $0.distance(otherLat: hymnSingVM.currentLocation?.latitude ?? 0, otherLong: hymnSingVM.currentLocation?.longitude ?? 0)
+            <
+            $1.distance(otherLat: hymnSingVM.currentLocation?.latitude ?? 0, otherLong: hymnSingVM.currentLocation?.longitude ?? 0)
+        })
         NavigationStack {
             ScrollView {
                 VStack(spacing: 15) {
-                    HymnSingCard(hymnSing: HymnSingModel(
-                        name: "Test",
-                        lead: "Lead", description: "Description"))
-                    HymnSingCard(hymnSing: HymnSingModel(
-                        name: "Test",
-                        lead: "Lead", description: "Description"))
-                    HymnSingCard(hymnSing: HymnSingModel(
-                        name: "Test",
-                        lead: "Lead", description: "Description"))
-
+                    if hymnSings.count > 0 {
+                        ForEach(hymnSings){sing in
+                            HymnSingCard(hymnSing: sing)
+                        }
+                        HymnSingCard(hymnSing: HymnSingModel(
+                                                name: "Test",
+                                                lead: "Lead", description: "Description"))
+                                            
+                        HymnSingCard(hymnSing: HymnSingModel(
+                                                name: "Test",
+                                                lead: "Lead", description: "Description"))
+                                            
+                        HymnSingCard(hymnSing: HymnSingModel(
+                                                name: "Test",
+                                                lead: "Lead", description: "Description"))
+                    }else{
+                        Text("NO HYMN SINGS")
+                    }
+                    
                 }.padding(.bottom)
+                
             }.padding(.horizontal)
                 .navigationTitle("Hymn Sings")
                 .searchable(text: $searchText)
@@ -54,4 +71,6 @@ struct HymnSingView: View {
     HymnSingView()
         .environmentObject(PersonViewModel())
         .environmentObject(HymnViewModel())
+        .environmentObject(AudioPlayerViewModel())
+        .environmentObject(HymnSingViewModel())
 }

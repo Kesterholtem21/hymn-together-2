@@ -14,6 +14,7 @@ struct MapView: UIViewRepresentable {
     let enableScroll: Bool
     
     init (hymnSing: HymnSingModel, enableScroll: Bool) {
+        print(hymnSing.longitude)
         self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: hymnSing.latitude, longitude: hymnSing.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.015))
         self.enableScroll = enableScroll
         self.coordinates = {
