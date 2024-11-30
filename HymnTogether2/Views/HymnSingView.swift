@@ -20,6 +20,7 @@ struct HymnSingView: View {
             <
             $1.distance(otherLat: hymnSingVM.currentLocation?.latitude ?? 0, otherLong: hymnSingVM.currentLocation?.longitude ?? 0)
         })
+        
         NavigationStack {
             ScrollView {
                 VStack(spacing: 15) {
@@ -27,31 +28,27 @@ struct HymnSingView: View {
                         ForEach(hymnSings){sing in
                             HymnSingCard(hymnSing: sing)
                         }
-                    }else{
-                        Text("NO HYMN SINGS")
                     }
-                    
-                }.padding(.bottom)
-                
-            }.padding(.horizontal)
-                .navigationTitle("Hymn Sings")
-                .searchable(text: $searchText)
-                .navigationBarItems(
-                    leading: PersonAvatar(person: personVM.person, diameter: 20.0),
-                    trailing:
-                        HStack(spacing: 10) {
-                            NavigationLink {
-                                AddHymnSingView()
-                            } label: {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 15.0, height: 15.0)
-                                    .foregroundStyle(.black)
-                            }
-                            AudioControls()
+                }.padding(.horizontal)
+            }
+            .navigationTitle("Hymn Sings")
+            .searchable(text: $searchText)
+            .navigationBarItems(
+                leading: PersonAvatar(person: personVM.person, diameter: 25.0),
+                trailing:
+                    HStack(spacing: 10) {
+                        NavigationLink {
+                            AddHymnSingView()
+                        } label: {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15.0, height: 15.0)
+                                .foregroundStyle(.black)
                         }
-                )
+                        AudioControls()
+                    }
+            )
         }
     }
 }

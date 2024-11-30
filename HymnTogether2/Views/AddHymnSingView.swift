@@ -14,11 +14,9 @@ struct AddHymnSingView: View {
     @State var latitude: Double = 0.0
     @State var longitude: Double = 0.0
     @EnvironmentObject var VM: HymnSingViewModel
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text("Add Hymn Sing").bold().font(.title)
-            
-            
             VStack(alignment: .leading, spacing: 10) {
                 Text("Name").bold()
                 ZStack {
@@ -26,8 +24,6 @@ struct AddHymnSingView: View {
                     TextField("Name", text: $name).padding(.horizontal)
                 }.frame(height: 50.0)
             }
-            
-            
             VStack(alignment: .leading, spacing: 10) {
                 Text("Lead").bold()
                 ZStack {
@@ -44,8 +40,7 @@ struct AddHymnSingView: View {
                     TextField("Description", text: $description).padding(.horizontal).lineLimit(3)
                 }.frame(height: 50.0)
             }
-            
-            HStack{
+            HStack(spacing: 10) {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Latitude").bold()
                     ZStack {
@@ -63,7 +58,6 @@ struct AddHymnSingView: View {
                 }
             }
             
-            
             Button{
                 VM.hymnSings.append(HymnSingModel(personId: "1", name: name, lead: lead, description: description, longitude: 0.0, latitude: 0.0))
                 
@@ -73,9 +67,7 @@ struct AddHymnSingView: View {
                     Text("Add Hymn Sing").foregroundStyle(.white).padding(.horizontal)
                 }.frame(height: 50.0)
             }
-            
-            
-            
+            Spacer()            
         }.navigationTitle("Add Hymn Sing").padding(.horizontal)
     }
 }

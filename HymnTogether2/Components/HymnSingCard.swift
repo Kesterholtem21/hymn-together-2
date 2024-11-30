@@ -22,23 +22,26 @@ struct HymnSingCard: View {
     
     var body: some View {
         NavigationLink {
-            MapView(hymnSing: hymnSing)
-                .navigationTitle(hymnSing.name)
-            VStack(alignment: .leading, spacing: 10){
-                Text(hymnSing.name)
-                    .font(.custom("body", size:32))
-                
-                Text(hymnSing.description)
-                    .font(.custom("body", size:16))
-                
-                Text(hymnSing.lead)
-                    .font(.custom("body", size:16))
-            }
-            
-            
+            VStack {
+                MapView(hymnSing: hymnSing, height: 300)
+                HStack {
+                    VStack(alignment: .leading, spacing: 15){
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Description").bold()
+                            Text(hymnSing.description)
+                        }
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Lead").bold()
+                            Text(hymnSing.lead)
+                        }
+                    }.padding()
+                    Spacer()
+                }
+                Spacer()
+            }.navigationTitle(hymnSing.name)
         } label: {
             VStack(spacing: 0) {
-                MapView(hymnSing: hymnSing).frame(height: 200.0)
+                MapView(hymnSing: hymnSing, height: 200)
                 ZStack {
                     Color(.gray).opacity(0.1)
                     VStack {
@@ -61,7 +64,7 @@ struct HymnSingCard: View {
                         }
                     }.padding()
                 }
-            }.foregroundColor(.black).cornerRadius(15.0)
+            }.foregroundColor(.black).cornerRadius(10.0)
         }
     }
 }
