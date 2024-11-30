@@ -60,6 +60,7 @@ struct ContentView: View {
                 peopleVM.getPeople()
                 hymnSingVM.getHymnSings()
                 hymnSingVM.getPersonHymnSings(id: id)
+                hymnSingVM.getUserLocation()
             } else {
                 needsOnboarding = true
             }

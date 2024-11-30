@@ -82,6 +82,7 @@ struct OnboardingSignup : View {
                         peopleVM.getPeople()
                         hymnSingVM.getHymnSings()
                         hymnSingVM.getPersonHymnSings(id: id)
+                        hymnSingVM.getUserLocation()
                         dismiss()
                     }
                 }
