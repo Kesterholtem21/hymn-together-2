@@ -27,17 +27,6 @@ struct HymnSingView: View {
                         ForEach(hymnSings){sing in
                             HymnSingCard(hymnSing: sing)
                         }
-                        HymnSingCard(hymnSing: HymnSingModel(
-                                                name: "Test",
-                                                lead: "Lead", description: "Description"))
-                                            
-                        HymnSingCard(hymnSing: HymnSingModel(
-                                                name: "Test",
-                                                lead: "Lead", description: "Description"))
-                                            
-                        HymnSingCard(hymnSing: HymnSingModel(
-                                                name: "Test",
-                                                lead: "Lead", description: "Description"))
                     }else{
                         Text("NO HYMN SINGS")
                     }
@@ -48,7 +37,7 @@ struct HymnSingView: View {
                 .navigationTitle("Hymn Sings")
                 .searchable(text: $searchText)
                 .navigationBarItems(
-                    leading: PersonAvatar(person: personVM.person, diameter: 15.0),
+                    leading: PersonAvatar(person: personVM.person, diameter: 20.0),
                     trailing:
                         HStack(spacing: 10) {
                             NavigationLink {

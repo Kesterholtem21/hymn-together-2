@@ -22,11 +22,11 @@ struct HymnSingCard: View {
     
     var body: some View {
         NavigationLink {
-            MapView(hymnSing: hymnSing, enableScroll: true)
+            MapView(hymnSing: hymnSing)
                 .navigationTitle(hymnSing.name)
         } label: {
             VStack(spacing: 0) {
-                MapView(hymnSing: hymnSing, enableScroll: false).frame(height: 200.0)
+                MapView(hymnSing: hymnSing).frame(height: 200.0)
                 ZStack {
                     Color(.gray).opacity(0.1)
                     VStack {
