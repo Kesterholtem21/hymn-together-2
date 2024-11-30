@@ -9,30 +9,27 @@ import SwiftUI
 
 struct RandomView: View {
     @EnvironmentObject var hymnVM: HymnViewModel
-    @EnvironmentObject var audioPlayerVM: AudioPlayerViewModel
-    @State var hymn: HymnModel = HymnModel()
+    @EnvironmentObject var personVM: PersonViewModel
     
     var body: some View {
         NavigationStack {
-            SelectedHymnView(hymn: hymn)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 15) {
+                    ForEach(hymnVM.randomHymns) { hymn in
+                        HymnCard(hymn: hymn)
+                    }
+                }.padding(.bottom).padding(.horizontal)
+            }
+            .navigationTitle("Random")
             .navigationBarItems(
-                trailing: HStack(spacing: 10) {
-                    Button {
-                        self.randomHymn()
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                    }.foregroundStyle(.black)
-                    ShareButton(music: hymn.music)
-                }
+                leading: PersonAvatar(person: personVM.person, diameter: 15.0),
+                trailing: AudioControls()
             )
         }.onAppear {
-            self.randomHymn()
+            hymnVM.getRandomHymns()
+        }.refreshable {
+            hymnVM.getRandomHymns()
         }
-    }
-    
-    private func randomHymn() {
-        self.hymn = hymnVM.hymns.randomElement()!
-        self.audioPlayerVM.pause()
     }
 }
 

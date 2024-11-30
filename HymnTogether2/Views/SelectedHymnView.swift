@@ -59,18 +59,20 @@ struct SelectedHymnView: View {
                             Text(hymn.author)
                     }
                     SelectedHymnOptions(hymn: hymn, color: color)
-
                 }
                 Spacer()
             }
 
         }
         .ignoresSafeArea()
+        .onAppear {
+            opacity = audioPlayerVM.playing && audioPlayerVM.hymnPlaying?.id == hymn.id ? 0.5 : 0.2
+        }
     }
 }
 
 #Preview {
-    SelectedHymnView(hymn: HymnModel(title: "Testing", author: "test", music: "https://google.com"))
+    SelectedHymnView(hymn:  HymnModel(title: "Testing", author: "test", music: "https://google.com"))
         .environmentObject(PersonViewModel())
         .environmentObject(AudioPlayerViewModel())
 }

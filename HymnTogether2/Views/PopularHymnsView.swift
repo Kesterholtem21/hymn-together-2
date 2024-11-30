@@ -14,12 +14,10 @@ struct PopularHymnsView: View {
     @State var searchTerm: String = ""
     
     var body: some View {
-        let popularHymns = hymnVM.getPopularHymns(people: peopleVM.people)
-        
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
-                    ForEach(popularHymns) { popularHymn in
+                    ForEach(hymnVM.popularHymns) { popularHymn in
                         PopularHymnCard(popularHymn: popularHymn)
                     }
                 }
@@ -33,6 +31,9 @@ struct PopularHymnsView: View {
                 trailing: AudioControls()
 
             )
+            .onAppear {
+                hymnVM.getPopularHymns(people: peopleVM.people)
+            }
         }
     }
 }

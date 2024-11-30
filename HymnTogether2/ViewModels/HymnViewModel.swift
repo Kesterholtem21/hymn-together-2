@@ -10,6 +10,8 @@ import Foundation
 
 class HymnViewModel : ObservableObject {
     @Published var hymns: [HymnModel] = [HymnModel]()
+    @Published var popularHymns: [PopularHymnModel] = [PopularHymnModel]()
+    @Published var randomHymns: [HymnModel] = [HymnModel]()
     
     init() {
         readJSON()
@@ -39,7 +41,7 @@ class HymnViewModel : ObservableObject {
         return filteredHymns
     }
     
-    func getPopularHymns(people: [PersonModel]) -> [PopularHymnModel] {
+    func getPopularHymns(people: [PersonModel]) {
         var hymnIds = Set<Int>()
         var savedHymns: [Int: Int] = [:]
         people.forEach { person in
@@ -54,6 +56,11 @@ class HymnViewModel : ObservableObject {
         let popularHymns = hymns.map { hymn in
             PopularHymnModel(hymn: hymn, saves: savedHymns[hymn.id] ?? 0)
         }.sorted { $0.saves > $1.saves }
-        return popularHymns
+        self.popularHymns = popularHymns
+    }
+    
+    func getRandomHymns() {
+        let shuffled = self.hymns.shuffled()
+        self.randomHymns = Array(shuffled.prefix(5))
     }
 }
