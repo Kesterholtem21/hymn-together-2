@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		67D758D32CFBD79100DBC625 /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 67D758D22CFBD79100DBC625 /* LocationPicker */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		671E1E502CF6CCD600DF5DF7 /* HymnTogether2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HymnTogether2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67D758D32CFBD79100DBC625 /* LocationPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = HymnTogether2;
 			packageProductDependencies = (
+				67D758D22CFBD79100DBC625 /* LocationPicker */,
 			);
 			productName = HymnTogether2;
 			productReference = 671E1E502CF6CCD600DF5DF7 /* HymnTogether2.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 671E1E472CF6CCD600DF5DF7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				67D758D12CFBD79100DBC625 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 671E1E512CF6CCD600DF5DF7 /* Products */;
 			projectDirPath = "";
@@ -339,6 +348,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		67D758D12CFBD79100DBC625 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alessiorubicini/LocationPickerForSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		67D758D22CFBD79100DBC625 /* LocationPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67D758D12CFBD79100DBC625 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */;
+			productName = LocationPicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 671E1E482CF6CCD600DF5DF7 /* Project object */;
 }

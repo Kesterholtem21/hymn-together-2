@@ -16,6 +16,7 @@ struct HymnSingModel : Decodable, Encodable, Identifiable {
     var description: String = ""
     var longitude: Double = 0.0
     var latitude: Double = 0.0
+    var date: Date = Date()
     
     private func degToRad(degrees: Double) -> Double{
         return degrees * .pi/180
