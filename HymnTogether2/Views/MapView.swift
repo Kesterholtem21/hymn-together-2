@@ -17,7 +17,7 @@ struct MapView: View {
             Marker(hymnSing.name, coordinate: CLLocationCoordinate2D(
                 latitude: hymnSing.latitude, longitude: hymnSing.longitude
             ))
-        }.disabled(disableScroll)
+        }.disabled(disableScroll).frame(height: 500)
     }
 }
 

@@ -24,6 +24,18 @@ struct HymnSingCard: View {
         NavigationLink {
             MapView(hymnSing: hymnSing)
                 .navigationTitle(hymnSing.name)
+            VStack(alignment: .leading, spacing: 10){
+                Text(hymnSing.name)
+                    .font(.custom("body", size:32))
+                
+                Text(hymnSing.description)
+                    .font(.custom("body", size:16))
+                
+                Text(hymnSing.lead)
+                    .font(.custom("body", size:16))
+            }
+            
+            
         } label: {
             VStack(spacing: 0) {
                 MapView(hymnSing: hymnSing).frame(height: 200.0)
