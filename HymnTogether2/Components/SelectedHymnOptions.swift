@@ -28,7 +28,7 @@ struct SelectedHymnOptions : View {
                     Text("Lyrics").font(.caption)
                 }.foregroundStyle(.black)
             }.sheet(isPresented: $presentLyrics) {
-                HymnLyrics(lyrics: hymn.lyrics, color: color).padding(20.0)
+                HymnLyrics(hymn: hymn, color: color).padding(20.0)
             }
             if (savedHymns.contains(hymn.id)) {
                 Button {
