@@ -12,7 +12,7 @@ import SwiftUI
 func render(hymn: HymnModel) -> URL {
     let renderer = ImageRenderer(content: PDFView(hymn: hymn))
     
-    let url = URL.documentsDirectory.appending(path: "output.pdf")
+    let url = URL.documentsDirectory.appending(path: "\(hymn.title).pdf")
     
     renderer.render { size, context in
         var box = CGRect(x:0,y:0, width:size.width, height:size.height)
