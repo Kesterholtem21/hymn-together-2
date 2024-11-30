@@ -14,9 +14,12 @@ struct AddHymnSingView: View {
     @State var latitude: Double = 0.0
     @State var longitude: Double = 0.0
     @EnvironmentObject var VM: HymnSingViewModel
+    @EnvironmentObject var personVM: PersonViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
+            Spacer()
+            //Text("Create Your Own Hymn Sing").bold().font(.title)
             VStack(alignment: .leading, spacing: 10) {
                 Text("Name").bold()
                 ZStack {
@@ -45,7 +48,7 @@ struct AddHymnSingView: View {
                     Text("Latitude").bold()
                     ZStack {
                         RoundedRectangle(cornerRadius: 10.0).fill(.gray).opacity(0.1)
-                        TextField("Latitude", text: $name).padding(.horizontal)
+                        TextField("Latitude", value: $latitude, formatter: NumberFormatter()).padding(.horizontal)
                     }.frame(height: 50.0)
                 }
                 
@@ -53,13 +56,13 @@ struct AddHymnSingView: View {
                     Text("Longitude").bold()
                     ZStack {
                         RoundedRectangle(cornerRadius: 10.0).fill(.gray).opacity(0.1)
-                        TextField("Longitude", text: $name).padding(.horizontal)
+                        TextField("Longitude", value: $longitude, formatter: NumberFormatter()).padding(.horizontal)
                     }.frame(height: 50.0)
                 }
             }
             
             Button{
-                VM.hymnSings.append(HymnSingModel(personId: "1", name: name, lead: lead, description: description, longitude: 0.0, latitude: 0.0))
+                VM.hymnSings.append(HymnSingModel(personId: personVM.person.id, name: name, lead: lead, description: description, longitude: 0.0, latitude: 0.0))
                 
             } label: {
                 ZStack {
@@ -73,6 +76,6 @@ struct AddHymnSingView: View {
 }
 
 #Preview {
-    AddHymnSingView().environmentObject(HymnSingViewModel())
+    AddHymnSingView().environmentObject(HymnSingViewModel()).environmentObject(PersonViewModel())
     
 }
