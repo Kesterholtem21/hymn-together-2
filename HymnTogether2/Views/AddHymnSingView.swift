@@ -87,6 +87,8 @@ struct AddHymnSingView: View {
             Button{
                 VM.hymnSings.append(HymnSingModel(personId: personVM.person.id, name: name, lead: personVM.person.name, description: description, longitude: location.longitude, latitude: location.latitude, date: date))
                 
+                personVM.hymnSings.append(HymnSingModel(personId: personVM.person.id, name: name, lead: personVM.person.name, description: description, longitude: location.longitude, latitude: location.latitude, date: date))
+                
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10.0).fill(.blue)
