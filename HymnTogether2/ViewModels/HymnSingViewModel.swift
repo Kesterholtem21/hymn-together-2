@@ -30,16 +30,19 @@ class HymnSingViewModel : NSObject, CLLocationManagerDelegate, ObservableObject 
             }
         }
     }
-        
+    
     func postHymnSing(hymnSing: HymnSingModel) {
         Task {
             await BackendService.postHymnSing(hymnSing: hymnSing)
-            print("ran")
             await MainActor.run {
                 self.hymnSings.append(hymnSing)
                 self.hymnSings = hymnSings
             }
         }
+    }
+        
+    func mutateHymnSings(hymnSing: HymnSingModel) {
+        self.hymnSings.append(hymnSing)
     }
       
     func getUserLocation(){

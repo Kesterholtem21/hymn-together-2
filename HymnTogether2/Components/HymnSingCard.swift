@@ -12,7 +12,7 @@ struct HymnSingCard: View {
     @State var time: Double = 1731620435.0
     
     func timeLeft() -> String {
-        let timeInterval = TimeInterval(time)
+        let timeInterval = TimeInterval(time) - Date().timeIntervalSince1970
         let days = Int(timeInterval) / 86400
         let hours = (Int(timeInterval) % 86400) / 3600
         let minutes = (Int(timeInterval) % 3600) / 60
@@ -58,7 +58,9 @@ struct HymnSingCard: View {
                     .padding()
                     .foregroundColor(.black)
                 }
-            }.cornerRadius(10.0)
+            }.cornerRadius(10.0).onAppear {
+                self.time = hymnSing.date
+            }
         }
     }
 }

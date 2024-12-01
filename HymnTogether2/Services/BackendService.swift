@@ -107,7 +107,7 @@ class BackendService {
         let url = URL(string: "https://\(self.API_KEY).mockapi.io/HymnSings")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST "
+        request.httpMethod = "POST"
         do {
             let encoded = try JSONEncoder().encode(hymnSing)
             try await URLSession.shared.upload(for: request, from: encoded)
