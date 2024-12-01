@@ -28,6 +28,19 @@ class PersonViewModel : ObservableObject {
         }
     }
     
+    func getHymnSings(id: String) {
+        Task {
+            let hymnSings = await BackendService.getPersonHymnSings(id: id)
+            await MainActor.run {
+                self.hymnSings = hymnSings
+            }
+        }
+    }
+    
+    func mutateHymnSings(hymnSing: HymnSingModel) {
+        self.hymnSings.append(hymnSing)
+    }
+    
     func putSaveHymn(hymn: HymnModel) {
         let id = hymn.id
         person.savedHymns.append(id)

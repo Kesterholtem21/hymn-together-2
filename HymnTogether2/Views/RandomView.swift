@@ -22,7 +22,7 @@ struct RandomView: View {
             }
             .navigationTitle("Random")
             .navigationBarItems(
-                leading: PersonAvatar(person: personVM.person, diameter: 15.0),
+                leading: PersonAvatar(person: personVM.person, diameter: 25.0),
                 trailing: AudioControls()
             )
         }.onAppear {

@@ -8,15 +8,20 @@
 import Foundation
 import CoreLocation
 
+struct PersonMetaModel : Decodable, Encodable {
+    var name: String = ""
+    var avatar: String = ""
+}
+
 struct HymnSingModel : Decodable, Encodable, Identifiable {
     var id: String = ""
     var personId: String = ""
     var name: String = ""
-    var lead: String = ""
     var description: String = ""
     var longitude: Double = 0.0
     var latitude: Double = 0.0
-    var date: Date = Date()
+    var date: TimeInterval = TimeInterval()
+    var person: PersonMetaModel = PersonMetaModel()
     
     private func degToRad(degrees: Double) -> Double{
         return degrees * .pi/180

@@ -28,6 +28,13 @@ class PeopleViewModel : ObservableObject {
         }
     }
     
+    func getPerson(id: String) -> PersonModel {
+        let filteredPeople = self.people.filter {
+            $0.id == id
+        }
+        return filteredPeople.first!
+    }
+    
     func mutatePeople(person: PersonModel) {
         var newPeople = self.people.filter {
             $0.id != person.id

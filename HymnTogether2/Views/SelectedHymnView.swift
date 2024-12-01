@@ -51,7 +51,7 @@ struct SelectedHymnView: View {
                                 .opacity(0.2).frame(width: 350)
                             
                             Image(systemName: playing ? "pause.fill" : "play.fill").resizable().frame(width: 35.0, height: 35.0).foregroundColor(.white)
-                        }.frame(width: 250, height: 250.0).clipped().cornerRadius(16.0)
+                        }.frame(width: 250, height: 250.0).clipped().cornerRadius(10.0)
                     }
                     VStack(alignment: .center, spacing: 10) {
                         Text(hymn.title).font(.title).bold().multilineTextAlignment(.center)
@@ -75,4 +75,5 @@ struct SelectedHymnView: View {
     SelectedHymnView(hymn:  HymnModel(title: "Testing", author: "test", music: "https://google.com"))
         .environmentObject(PersonViewModel())
         .environmentObject(AudioPlayerViewModel())
+        .environmentObject(PeopleViewModel())
 }

@@ -79,9 +79,9 @@ struct OnboardingSignup : View {
                     await MainActor.run {
                         self.id = person.id
                         personVM.getPerson(id: id)
+                        personVM.getHymnSings(id: id)
                         peopleVM.getPeople()
                         hymnSingVM.getHymnSings()
-                        hymnSingVM.getPersonHymnSings(id: id)
                         hymnSingVM.getUserLocation()
                         dismiss()
                     }

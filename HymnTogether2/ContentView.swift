@@ -34,7 +34,7 @@ struct ContentView: View {
                     }
                     RandomView().tabItem {
                         VStack {
-                            Image(systemName: "arrow.clockwise")
+                            Image(systemName: "arrow.down.left.arrow.up.right")
                             Text("Random")
                         }
                     }
@@ -57,9 +57,9 @@ struct ContentView: View {
         }.onAppear {
             if !id.isEmpty {
                 personVM.getPerson(id: id)
+                personVM.getHymnSings(id: id)
                 peopleVM.getPeople()
                 hymnSingVM.getHymnSings()
-                hymnSingVM.getPersonHymnSings(id: id)
                 hymnSingVM.getUserLocation()
             } else {
                 needsOnboarding = true

@@ -17,7 +17,7 @@ struct HymnCard: View {
                 )
         } label: {
             ZStack {
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 10)
                     .fill(.gray).opacity(0.1)
                 HStack {
                     ZStack {
@@ -32,16 +32,16 @@ struct HymnCard: View {
                     }.frame(width: 150.0).clipped()
                     VStack(alignment: .leading, spacing: 10) {
                         Text(hymn.title)
+                            .font(.title3)
                             .bold()
                             .multilineTextAlignment(.leading)
                         Text(hymn.author)
                             .multilineTextAlignment(.leading)
                     }.padding().foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .leading) // Aligns text to the left
-
                     Spacer()
                 }
-            }.frame(height: 150.0).cornerRadius(16.0)
+            }.frame(height: 150.0).cornerRadius(10.0)
         }
     }
 }

@@ -25,7 +25,7 @@ struct PopularHymnCard: View {
             )
         } label: {
             ZStack {
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 10.0)
                     .fill(.gray).opacity(0.1)
                 HStack {
                     ZStack {
@@ -40,25 +40,28 @@ struct PopularHymnCard: View {
                     }.frame(width: 150.0).clipped()
                     VStack(alignment: .leading, spacing: 10) {
                         Text(hymn.title)
+                            .font(.title3)
                             .bold()
                             .multilineTextAlignment(.leading)
                         Text(hymn.author)
                             .multilineTextAlignment(.leading)
-                        HStack(alignment: .bottom, spacing: 10) {
+                        HStack(alignment: .center, spacing: 10) {
                             Image(systemName: "heart.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 15, height: 15)
                                 .foregroundColor(.black)
                             Text("\(popularHymn.saves)")
-                                .frame(height: 15).font(.caption)
+                                .font(.caption)
+                                .frame(height: 15)
+                                .bold()
                         }
                     }.padding().foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .leading) // Aligns text to the left
 
                     Spacer()
                 }
-            }.frame(height: 150.0).cornerRadius(16.0)
+            }.frame(height: 150.0).cornerRadius(10.0)
         }
     }
 }

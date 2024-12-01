@@ -46,7 +46,6 @@ struct HymnSingView: View {
                                 .frame(width: 15.0, height: 15.0)
                                 .foregroundStyle(.black)
                         }
-                        AudioControls()
                     }
             )
         }

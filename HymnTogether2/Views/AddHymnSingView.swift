@@ -16,13 +16,11 @@ struct AddHymnSingView: View {
     @State var location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     @State var showSheet = false
     @State var date: Date = Date()
-    @EnvironmentObject var VM: HymnSingViewModel
+    @EnvironmentObject var hymnSingVM: HymnSingViewModel
     @EnvironmentObject var personVM: PersonViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Spacer()
-            //Text("Create Your Own Hymn Sing").bold().font(.title)
             VStack(alignment: .leading, spacing: 10) {
                 Text("Name").bold()
                 ZStack {
@@ -30,8 +28,6 @@ struct AddHymnSingView: View {
                     TextField("Name", text: $name).padding(.horizontal)
                 }.frame(height: 50.0)
             }
-            
-            
             VStack(alignment: .leading, spacing: 10) {
                 Text("Description").bold()
                 ZStack {
@@ -39,63 +35,41 @@ struct AddHymnSingView: View {
                     TextField("Description", text: $description).padding(.horizontal).lineLimit(3)
                 }.frame(height: 50.0)
             }
-            
-            
-            
-            
-//            HStack(spacing: 10) {
-//                VStack(alignment: .leading, spacing: 10) {
-//                    Text("Latitude").bold()
-//                    ZStack {
-//                        RoundedRectangle(cornerRadius: 10.0).fill(.gray).opacity(0.1)
-//                        TextField("Latitude", value: $latitude, formatter: NumberFormatter()).padding(.horizontal)
-//                    }.frame(height: 50.0)
-//                }
-//                
-//                VStack(alignment: .leading, spacing: 10) {
-//                    Text("Longitude").bold()
-//                    ZStack {
-//                        RoundedRectangle(cornerRadius: 10.0).fill(.gray).opacity(0.1)
-//                        TextField("Longitude", value: $longitude, formatter: NumberFormatter()).padding(.horizontal)
-//                    }.frame(height: 50.0)
-//                }
-//            }
-           
             VStack(alignment: .leading, spacing: 10) {
-//                Text("Date").bold()
-//                ZStack {
-//                    RoundedRectangle(cornerRadius: 10.0).fill(.gray).opacity(0.1)
-//                    TextField("Name", text: $name).padding(.horizontal)
-//                }.frame(height: 50.0)
-                DatePicker("Date of Hymn Sing: ", selection: $date, displayedComponents: .date).padding(.horizontal).bold()
-            }.padding(.vertical)
-            
-            
+                DatePicker("Date", selection: $date, displayedComponents: .date).bold()
+            }
             Button{
                 showSheet = true
             }label: {
-                Text("Current Location: \(location.latitude), \(location.longitude)")
                 ZStack {
-                    
                     RoundedRectangle(cornerRadius: 10.0).fill(.green)
                     Text("Pick a location").foregroundStyle(.white).padding(.horizontal)
                 }.frame(height: 50.0)
             }.sheet(isPresented: $showSheet){
                 LocationPicker(instructions: "Pick a location", coordinates: $location)
             }
-            
-            Button{
-                VM.hymnSings.append(HymnSingModel(personId: personVM.person.id, name: name, lead: personVM.person.name, description: description, longitude: location.longitude, latitude: location.latitude, date: date))
-                
-                personVM.hymnSings.append(HymnSingModel(personId: personVM.person.id, name: name, lead: personVM.person.name, description: description, longitude: location.longitude, latitude: location.latitude, date: date))
-                
+            Button {
+                let hymnSing = HymnSingModel(
+                    personId: personVM.person.id,
+                    name: name,
+                    description: description,
+                    longitude: location.longitude,
+                    latitude: location.latitude,
+                    date: date.timeIntervalSince1970,
+                    person: PersonMetaModel(
+                        name: personVM.person.name,
+                        avatar: personVM.person.avatar
+                    )
+                )
+                hymnSingVM.postHymnSing(hymnSing: hymnSing)
+                personVM.mutateHymnSings(hymnSing: hymnSing)
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10.0).fill(.blue)
                     Text("Add Hymn Sing").foregroundStyle(.white).padding(.horizontal)
                 }.frame(height: 50.0)
             }
-            Spacer()            
+            Spacer()
         }.navigationTitle("Add Hymn Sing").padding(.horizontal)
     }
 }

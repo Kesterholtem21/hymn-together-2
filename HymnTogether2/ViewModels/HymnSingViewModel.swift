@@ -11,7 +11,6 @@ import CoreLocation
 class HymnSingViewModel : NSObject, CLLocationManagerDelegate, ObservableObject {
     @Published var loading: Bool = false
     @Published var hymnSings: [HymnSingModel] = [HymnSingModel]()
-    @Published var personHymnSings: [HymnSingModel] = [HymnSingModel]()
     
     var locationManager = CLLocationManager() // create a location manager to request permission from user
     @Published var currentLocation : CLLocationCoordinate2D? = nil // save user's current location
@@ -31,36 +30,19 @@ class HymnSingViewModel : NSObject, CLLocationManagerDelegate, ObservableObject 
             }
         }
     }
-    
+        
     func postHymnSing(hymnSing: HymnSingModel) {
         Task {
             await BackendService.postHymnSing(hymnSing: hymnSing)
-        }
-    }
-    
-    func getPersonHymnSings(id: String) {
-        self.loading = true
-        Task {
-            let personHymnSings = await BackendService.getPersonHymnSings(id: id)
+            print("ran")
             await MainActor.run {
-                self.personHymnSings = personHymnSings
-                self.loading = false
+                self.hymnSings.append(hymnSing)
+                self.hymnSings = hymnSings
             }
         }
     }
-    
-    func mutateHymnSings(hymnSing: HymnSingModel) {
-        self.hymnSings.append(hymnSing)
-        self.hymnSings = hymnSings
-    }
-    
-    func mutatePersonHymnSings(hymnSing: HymnSingModel) {
-        self.personHymnSings.append(hymnSing)
-        self.personHymnSings = personHymnSings
-    }
-    
+      
     func getUserLocation(){
-        // Check if we have the permission
         if locationManager.authorizationStatus == .authorizedWhenInUse{
             currentLocation = nil
             locationManager.requestLocation()
@@ -74,7 +56,6 @@ class HymnSingViewModel : NSObject, CLLocationManagerDelegate, ObservableObject 
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        // detect if user allowed, then request location
         if manager.authorizationStatus == .authorizedWhenInUse{
             currentLocation = nil
             manager.requestLocation()
@@ -82,8 +63,6 @@ class HymnSingViewModel : NSObject, CLLocationManagerDelegate, ObservableObject 
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // locations.first?.coordinate
-        // print(locations.last?.coordinate)
         if currentLocation == nil {
             currentLocation = locations.last?.coordinate
         }

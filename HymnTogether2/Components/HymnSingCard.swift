@@ -22,33 +22,15 @@ struct HymnSingCard: View {
     
     var body: some View {
         NavigationLink {
-            VStack {
-                MapView(hymnSing: hymnSing, height: 300)
-                HStack {
-                    VStack(alignment: .leading, spacing: 15){
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Description").bold()
-                            Text(hymnSing.description)
-                        }
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Lead").bold()
-                            Text(hymnSing.lead)
-                        }
-                    }.padding()
-                    Spacer()
-                }
-                Spacer()
-            }.navigationTitle(hymnSing.name)
+            SelectedHymnSingView(hymnSing: hymnSing)
         } label: {
-            VStack(spacing: 0) {
-                MapView(hymnSing: hymnSing, height: 200)
+            VStack {
                 ZStack {
                     Color(.gray).opacity(0.1)
                     VStack {
                         HStack {
                             VStack(alignment: .leading, spacing: 10) {
-                                
-                                Text(hymnSing.name).bold()
+                                Text(hymnSing.name).font(.title3).bold()
                                 Text(hymnSing.description)
                             }
                             Spacer()
@@ -62,9 +44,21 @@ struct HymnSingCard: View {
                             }
                             Spacer()
                         }
-                    }.padding()
+                        HStack(spacing: 10) {
+                            AsyncImage(url: URL(string: hymnSing.person.avatar)) { result in
+                                result.image?
+                                    .resizable()
+                                    .frame(width: 25.0, height: 25.0)
+                                    .cornerRadius(.infinity)
+                            }.frame(width: 25.0, height: 25.0)
+                            Text(hymnSing.person.name).bold()
+                            Spacer()
+                        }
+                    }
+                    .padding()
+                    .foregroundColor(.black)
                 }
-            }.foregroundColor(.black).cornerRadius(10.0)
+            }.cornerRadius(10.0)
         }
     }
 }

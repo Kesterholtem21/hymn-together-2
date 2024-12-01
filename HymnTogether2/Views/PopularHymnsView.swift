@@ -20,14 +20,13 @@ struct PopularHymnsView: View {
                     ForEach(hymnVM.popularHymns) { popularHymn in
                         PopularHymnCard(popularHymn: popularHymn)
                     }
-                }
+                }.padding(.bottom).padding(.horizontal)
             }
-            .padding(.horizontal)
             .navigationTitle("Popular Hymns")
             .searchable(text: $searchTerm).cornerRadius(16.0)
             .navigationTitle("Hymns")
             .navigationBarItems(
-                leading: PersonAvatar(person: personVM.person, diameter: 20.0),
+                leading: PersonAvatar(person: personVM.person, diameter: 25.0),
                 trailing: AudioControls()
 
             )

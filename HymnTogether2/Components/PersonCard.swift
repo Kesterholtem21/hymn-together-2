@@ -20,13 +20,18 @@ struct PersonCard: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 15) {
                         HStack(spacing: 10) {
-                            PersonAvatar(person: person, diameter: 50.0)
+                            AsyncImage(url: URL(string: person.avatar)) { result in
+                                result.image?
+                                    .resizable()
+                                    .frame(width: 50.0, height: 50.0)
+                                    .cornerRadius(.infinity)
+                            }.frame(width: 50.0, height: 50.0)
                             Text(person.name).bold().font(.title2)
                         }
                     }
                     Spacer()
                 }.padding().foregroundColor(.black)
-            }.cornerRadius(10)
+            }.cornerRadius(10).fixedSize(horizontal: false, vertical: true)
         }
     }
 }
