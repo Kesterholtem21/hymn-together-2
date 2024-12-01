@@ -20,8 +20,13 @@ struct SelectedPersonSavedHymns : View {
 }
 
 struct SelectedPersonHymnSings : View {
+    @EnvironmentObject var personVM: PersonViewModel
     var body : some View {
         VStack(alignment: .leading, spacing: 15) {
+            ForEach(personVM.hymnSings){ hymnSing in
+                HymnSingCard(hymnSing: hymnSing)
+                
+            }
         }
     }
 }
