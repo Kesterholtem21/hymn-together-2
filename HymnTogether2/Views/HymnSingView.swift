@@ -14,12 +14,13 @@ struct HymnSingView: View {
     @State var presentAdd: Bool = false
     
     var body: some View {
-        let hymnSings = hymnSingVM.hymnSings.sorted(
-            by:{
-            $0.distance(otherLat: hymnSingVM.currentLocation?.latitude ?? 0, otherLong: hymnSingVM.currentLocation?.longitude ?? 0)
-            <
-            $1.distance(otherLat: hymnSingVM.currentLocation?.latitude ?? 0, otherLong: hymnSingVM.currentLocation?.longitude ?? 0)
-        })
+        let hymnSingRef = hymnSingVM.currentLocation
+        let hymnSings = hymnSingVM.hymnSings.sorted{(hymn1, hymn2) in
+            let distance1 = hymn1.distance(other:hymnSingRef)
+            let distance2 = hymn2.distance(other:hymnSingRef)
+            
+            return distance1 < distance2
+        }
         
         NavigationStack {
             ScrollView {

@@ -27,19 +27,31 @@ struct HymnSingModel : Decodable, Encodable, Identifiable {
         return degrees * .pi/180
     }
     
-    func distance(otherLat : Double, otherLong: Double) -> Double{
+    var latRads : Double{
+        return self.latitude * .pi/180
+    }
+    
+    var longRads : Double{
+        return self.longitude * .pi/180
+    }
+    
+    func distance(other: CLLocationCoordinate2D?) -> Double{
+        if other == nil{
+            return 0.0
+        }
+        
         let radius = 6371.0
         
-        let lat1  = degToRad(degrees: self.latitude)
-        let lat2 =  degToRad(degrees: otherLat)
+        let lat1  = self.latRads
+        let lat2 =  other?.latitude
         
-        let long1 = degToRad(degrees: self.longitude)
-        let long2 = degToRad(degrees: otherLong)
+        let long1 = self.longRads
+        let long2 = other?.longitude
         
-        let deltaLat = lat2 - lat1
-        let deltaLong = long2 - long1
+        let deltaLat = lat2! - lat1
+        let deltaLong = long2! - long1
         
-        let distance = 2 * radius * asin(sqrt(pow(sin(deltaLat/2), 2) + cos(lat1)*cos(lat2)*pow(sin(deltaLong/2), 2)))
+        let distance = 2 * radius * asin(sqrt(pow(sin(deltaLat/2), 2) + cos(lat1)*cos(lat2!)*pow(sin(deltaLong/2), 2)))
         
         return distance
     }
