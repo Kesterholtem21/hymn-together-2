@@ -20,6 +20,9 @@ struct HymnSingView: View {
             let distance2 = hymn2.distance(other:hymnSingRef)
             
             return distance1 < distance2
+        }.filter{
+            let currentDate = Date()
+            return currentDate.timeIntervalSince1970 < $0.date
         }
         
         NavigationStack {
@@ -27,8 +30,12 @@ struct HymnSingView: View {
                 VStack(spacing: 15) {
                     if hymnSings.count > 0 {
                         ForEach(hymnSings){sing in
-                            HymnSingCard(hymnSing: sing)
+                            HymnSingCard(hymnSing: sing).onAppear{
+                                print(sing.date)
+                            }
                         }
+                    }else{
+                        Text("No Hymn Sings Found")
                     }
                 }.padding(.horizontal)
             }

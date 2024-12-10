@@ -24,7 +24,9 @@ struct SelectedPersonHymnSings : View {
     var body : some View {
         VStack(alignment: .leading, spacing: 15) {
             ForEach(personVM.hymnSings){ hymnSing in
-                HymnSingCard(hymnSing: hymnSing)
+                HymnSingCard(hymnSing: hymnSing).onAppear{
+                    print(hymnSing.name)
+                }
                 
             }
         }

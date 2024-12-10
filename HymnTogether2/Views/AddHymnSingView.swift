@@ -41,10 +41,16 @@ struct AddHymnSingView: View {
             Button{
                 showSheet = true
             }label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10.0).fill(.green)
-                    Text("Pick a location").foregroundStyle(.white).padding(.horizontal)
-                }.frame(height: 50.0)
+                VStack{
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10.0).fill(.green)
+                        Text("Pick a location").foregroundStyle(.white).padding(.horizontal)
+                    }.frame(height: 50.0)
+                    if location.latitude != 0.0 && location.longitude != 0.0{
+                        Text("Latitude: \(location.latitude), Longitude: \(location.longitude)").foregroundStyle(.black)
+                            .font(.custom("HelveticaNeue-Light", size: 12))
+                    }
+                }
             }.sheet(isPresented: $showSheet){
                 LocationPicker(instructions: "Pick a location", coordinates: $location)
             }
