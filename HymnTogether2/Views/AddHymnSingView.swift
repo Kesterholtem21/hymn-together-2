@@ -48,7 +48,6 @@ struct AddHymnSingView: View {
                     }.frame(height: 50.0)
                     if location.latitude != 0.0 && location.longitude != 0.0{
                         Text("Latitude: \(location.latitude), Longitude: \(location.longitude)").foregroundStyle(.black)
-                            .font(.custom("HelveticaNeue-Light", size: 12))
                     }
                 }
             }.sheet(isPresented: $showSheet){
@@ -67,8 +66,12 @@ struct AddHymnSingView: View {
                         avatar: personVM.person.avatar
                     )
                 )
-                hymnSingVM.postHymnSing(hymnSing: hymnSing)
-                personVM.mutateHymnSings(hymnSing: hymnSing)
+                Task {
+                      let createdHymnSing = await hymnSingVM.postHymnSing(hymnSing: hymnSing)
+                      await MainActor.run {
+                          personVM.mutateHymnSings(hymnSing:    createdHymnSing)
+                      }
+                }
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10.0).fill(.blue)

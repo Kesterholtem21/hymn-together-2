@@ -27,7 +27,6 @@ struct SelectedPersonHymnSings : View {
                 HymnSingCard(hymnSing: hymnSing).onAppear{
                     print(hymnSing.name)
                 }
-                
             }
         }
     }

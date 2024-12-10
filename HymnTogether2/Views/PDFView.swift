@@ -16,15 +16,18 @@ struct PDFView: View {
                 Text(hymn.title).font(Font.custom("Georgia", size: 30.0)).bold()
                 Text("By \(hymn.author)").font(Font.custom("Georgia", size: 15.0))
             }
-            VStack(alignment: .leading, spacing: 15) {
-                ForEach(0..<hymn.lyrics.count, id: \.self) { i in
-                    VStack(alignment: .leading, spacing: 5) {
-                        ForEach(0..<hymn.lyrics[i].count, id: \.self) { j in
-                            let verse = hymn.lyrics[i][j]
-                            Text(verse).font(Font.custom("Georgia", size: 20.0))
+            HStack(spacing: 0) {
+                VStack(alignment: .leading, spacing: 15) {
+                    ForEach(0..<hymn.lyrics.count, id: \.self) { i in
+                        VStack(alignment: .leading, spacing: 5) {
+                            ForEach(0..<hymn.lyrics[i].count, id: \.self) { j in
+                                let verse = hymn.lyrics[i][j]
+                                Text(verse).font(Font.custom("Georgia", size: 20.0))
+                            }
                         }
                     }
                 }
+                Spacer()
             }
             HStack(spacing: 0) {
                 Text("Powered by ").font(Font.custom("Georgia", size: 15.0))

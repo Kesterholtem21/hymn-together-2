@@ -20,31 +20,27 @@ class HymnSingViewModel : NSObject, CLLocationManagerDelegate, ObservableObject 
         locationManager.delegate = self
     }
     
+    func postHymnSing(hymnSing: HymnSingModel) async -> HymnSingModel {
+        let createdHymnSing = await BackendService.postHymnSing(hymnSing: hymnSing)
+        await MainActor.run {
+            self.hymnSings.append(createdHymnSing)
+        }
+        return createdHymnSing
+    }
+    
     func getHymnSings() {
         self.loading = true
         Task {
             let hymnSings = await BackendService.getHymnSings()
             await MainActor.run {
-                self.hymnSings = hymnSings
+                self.hymnSings = hymnSings.filter {
+                    $0.date > Date().timeIntervalSince1970
+                }
                 self.loading = false
             }
         }
     }
     
-    func postHymnSing(hymnSing: HymnSingModel) {
-        Task {
-            await BackendService.postHymnSing(hymnSing: hymnSing)
-            await MainActor.run {
-                self.hymnSings.append(hymnSing)
-                self.hymnSings = hymnSings
-            }
-        }
-    }
-        
-    func mutateHymnSings(hymnSing: HymnSingModel) {
-        self.hymnSings.append(hymnSing)
-    }
-      
     func getUserLocation(){
         if locationManager.authorizationStatus == .authorizedWhenInUse{
             currentLocation = nil

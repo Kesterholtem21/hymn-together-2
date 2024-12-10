@@ -20,9 +20,6 @@ struct HymnSingView: View {
             let distance2 = hymn2.distance(other:hymnSingRef)
             
             return distance1 < distance2
-        }.filter{
-            let currentDate = Date()
-            return currentDate.timeIntervalSince1970 < $0.date
         }
         
         NavigationStack {

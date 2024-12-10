@@ -103,17 +103,23 @@ class BackendService {
         return [HymnSingModel]()
     }
     
-    static func postHymnSing(hymnSing: HymnSingModel) async {
+    static func postHymnSing(hymnSing: HymnSingModel) async -> HymnSingModel {
         let url = URL(string: "https://\(self.API_KEY).mockapi.io/HymnSings")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
+        
         do {
             let encoded = try JSONEncoder().encode(hymnSing)
-            try await URLSession.shared.upload(for: request, from: encoded)
+            let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
+             let createdHymnSing = try JSONDecoder().decode(HymnSingModel.self, from: data)
+              print(createdHymnSing)
+             return createdHymnSing
         } catch {
             print("Checkout failed: \(error.localizedDescription)")
         }
+        
+        return HymnSingModel()
     }
     
     static func getPersonHymnSings(id: String) async -> [HymnSingModel] {

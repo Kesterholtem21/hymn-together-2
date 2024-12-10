@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		67D758D32CFBD79100DBC625 /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 67D758D22CFBD79100DBC625 /* LocationPicker */; };
+		67F3A13F2D07E6CE00CA75F3 /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 67F3A13E2D07E6CE00CA75F3 /* LocationPicker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67D758D32CFBD79100DBC625 /* LocationPicker in Frameworks */,
+				67F3A13F2D07E6CE00CA75F3 /* LocationPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 			);
 			name = HymnTogether2;
 			packageProductDependencies = (
-				67D758D22CFBD79100DBC625 /* LocationPicker */,
+				67F3A13E2D07E6CE00CA75F3 /* LocationPicker */,
 			);
 			productName = HymnTogether2;
 			productReference = 671E1E502CF6CCD600DF5DF7 /* HymnTogether2.app */;
@@ -114,7 +114,7 @@
 			mainGroup = 671E1E472CF6CCD600DF5DF7;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				67D758D12CFBD79100DBC625 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */,
+				67F3A13D2D07E6CE00CA75F3 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 671E1E512CF6CCD600DF5DF7 /* Products */;
@@ -277,7 +277,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HymnTogether2/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -307,7 +306,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HymnTogether2/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -350,7 +348,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		67D758D12CFBD79100DBC625 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */ = {
+		67F3A13D2D07E6CE00CA75F3 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/alessiorubicini/LocationPickerForSwiftUI";
 			requirement = {
@@ -361,9 +359,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		67D758D22CFBD79100DBC625 /* LocationPicker */ = {
+		67F3A13E2D07E6CE00CA75F3 /* LocationPicker */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 67D758D12CFBD79100DBC625 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */;
+			package = 67F3A13D2D07E6CE00CA75F3 /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */;
 			productName = LocationPicker;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -32,7 +32,9 @@ class PersonViewModel : ObservableObject {
         Task {
             let hymnSings = await BackendService.getPersonHymnSings(id: id)
             await MainActor.run {
-                self.hymnSings = hymnSings
+                self.hymnSings = hymnSings.filter {
+                    $0.date > Date().timeIntervalSince1970
+                }
             }
         }
     }
