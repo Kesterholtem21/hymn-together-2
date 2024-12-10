@@ -23,12 +23,17 @@ struct SelectedHymnSingView: View {
         VStack {
             MapView(hymnSing: hymnSing, height: 300)
             VStack(alignment: .leading, spacing: 15){
-                HStack(spacing: 0) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Lead").bold().font(.title3)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Lead").bold().font(.title3)
+                    HStack(spacing: 10) {
+                        AsyncImage(url: URL(string: person.avatar)) { result in
+                            result.image?
+                                .resizable()
+                                .frame(width: 25.0, height: 25.0)
+                                .cornerRadius(.infinity)
+                        }
                         Text(person.name)
                     }
-                    Spacer()
                 }
                 HStack(spacing: 0) {
                     VStack(alignment: .leading, spacing: 10) {
