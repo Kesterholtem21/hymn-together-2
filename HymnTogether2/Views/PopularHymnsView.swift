@@ -14,11 +14,22 @@ struct PopularHymnsView: View {
     @State var searchTerm: String = ""
     
     var body: some View {
+        let searchResults: [PopularHymnModel] = hymnVM.popularHymns.filter {
+            $0.hymn.author.lowercased().contains(searchTerm.lowercased()) ||
+            $0.hymn.title.lowercased().contains(searchTerm.lowercased())
+        }
+        
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
-                    ForEach(hymnVM.popularHymns) { popularHymn in
-                        PopularHymnCard(popularHymn: popularHymn)
+                    if (searchResults.count > 0) {
+                        ForEach(searchResults) { popularHymn in
+                            PopularHymnCard(popularHymn: popularHymn)
+                        }
+                    } else {
+                        ForEach(hymnVM.popularHymns) { popularHymn in
+                            PopularHymnCard(popularHymn: popularHymn)
+                        }
                     }
                 }.padding(.bottom).padding(.horizontal)
             }

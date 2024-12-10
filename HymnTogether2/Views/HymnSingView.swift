@@ -10,9 +10,9 @@ import SwiftUI
 struct HymnSingView: View {
     @EnvironmentObject var personVM: PersonViewModel
     @EnvironmentObject var hymnSingVM: HymnSingViewModel
-    @State var searchText: String = ""
     @State var presentAdd: Bool = false
-    
+    @State var searchTerm: String = ""
+
     var body: some View {
         let hymnSingRef = hymnSingVM.currentLocation
         let hymnSings = hymnSingVM.hymnSings.sorted{(hymn1, hymn2) in
@@ -21,23 +21,26 @@ struct HymnSingView: View {
             
             return distance1 < distance2
         }
+        let searchResults: [HymnSingModel] = hymnSingVM.hymnSings.filter {
+            $0.name.lowercased().contains(searchTerm.lowercased())
+        }
         
         NavigationStack {
             ScrollView {
                 VStack(spacing: 15) {
-                    if hymnSings.count > 0 {
-                        ForEach(hymnSings){sing in
-                            HymnSingCard(hymnSing: sing).onAppear{
-                                print(sing.date)
-                            }
+                    if (searchResults.count > 0) {
+                        ForEach(searchResults) { hymnSing in
+                            HymnSingCard(hymnSing: hymnSing)
                         }
-                    }else{
-                        Text("No Hymn Sings Found")
+                    } else {
+                        ForEach(hymnSingVM.hymnSings) { hymnSing in
+                            HymnSingCard(hymnSing: hymnSing)
+                        }
                     }
                 }.padding(.horizontal)
             }
             .navigationTitle("Hymn Sings")
-            .searchable(text: $searchText)
+            .searchable(text: $searchTerm)
             .navigationBarItems(
                 leading: PersonAvatar(person: personVM.person, diameter: 25.0),
                 trailing:
