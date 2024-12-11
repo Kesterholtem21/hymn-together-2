@@ -44,16 +44,6 @@ struct HymnSingCard: View {
                             }
                             Spacer()
                         }
-                        HStack(spacing: 10) {
-                            AsyncImage(url: URL(string: hymnSing.person.avatar)) { result in
-                                result.image?
-                                    .resizable()
-                                    .frame(width: 25.0, height: 25.0)
-                                    .cornerRadius(.infinity)
-                            }.frame(width: 25.0, height: 25.0)
-                            Text(hymnSing.person.name).bold()
-                            Spacer()
-                        }
                     }
                     .padding()
                     .foregroundColor(.black)

@@ -49,6 +49,17 @@ struct SelectedHymnSingView: View {
                     }
                     Spacer()
                 }
+                Button {
+                    let url = URL(string: "maps://?saddr=&daddr=\(hymnSing.latitude),\(hymnSing.longitude)")
+                    if UIApplication.shared.canOpenURL(url!) {
+                          UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                    }
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10.0).fill(.blue)
+                        Text("Get Directions").foregroundStyle(.white).padding(.horizontal)
+                    }.frame(height: 50.0)
+                }
                 Spacer()
             }.padding()
         }.navigationTitle(hymnSing.name)

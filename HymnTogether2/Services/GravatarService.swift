@@ -21,6 +21,6 @@ class GravatarService {
     }
     
     static func getAvatar(email: String) -> String {
-        return "https://gravatar.com/avatar/\(self.md5(email))"
+        return "https://gravatar.com/avatar/\(self.md5(email))?d=identicon"
     }
 }
