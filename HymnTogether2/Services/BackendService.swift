@@ -11,7 +11,6 @@ class BackendService {
     private static let API_KEY = "6732662c2a1b1a4ae10fdb5c"
     
     static func getPerson(id: String) async -> PersonModel {
-        print(id)
         if let url = URL(string: "https://\(self.API_KEY).mockapi.io/People?id=\(id)"){
             let request = URLRequest(url: url)
             do{
@@ -37,9 +36,38 @@ class BackendService {
         return PersonModel()
     }
     
+    static func getPerson(email: String) async -> PersonModel? {
+        if let url = URL(string: "https://\(self.API_KEY).mockapi.io/People?email=\(email)"){
+            let request = URLRequest(url: url)
+            do{
+                let (data, response) = try await URLSession.shared.data(for: request)
+                if let httpResponse = response as? HTTPURLResponse{
+                    let statusCode = httpResponse.statusCode
+                    if statusCode == 200 {
+                        do{
+                            let jsonResponse = try JSONDecoder().decode([PersonModel].self, from: data)
+                            if jsonResponse.count > 0 {
+                                return jsonResponse.first!
+                            } else {
+                                return nil
+                            }
+                        } catch {
+                            print(error)
+                        }
+                    } else {
+                        print("getPerson statusCode: \(statusCode)")
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+
+        return nil
+    }
+    
     static func getPeople() async -> [PersonModel] {
         if let url = URL(string: "https://\(self.API_KEY).mockapi.io/People"){
-            print("ran getPeople")
             let request = URLRequest(url: url)
             do{
                 let (data, response) = try await URLSession.shared.data(for: request)
@@ -69,7 +97,6 @@ class BackendService {
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "PUT"
-        print(person)
         do {
             let encoded = try JSONEncoder().encode(person)
             try await URLSession.shared.upload(for: request, from: encoded)
@@ -123,9 +150,7 @@ class BackendService {
     }
     
     static func getPersonHymnSings(id: String) async -> [HymnSingModel] {
-        
         let url = URL(string: "https://\(self.API_KEY).mockapi.io/People/\(id)/HymnSings?sortBy=date&orderBy=desc")!
-        print(url.path())
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         do {

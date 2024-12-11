@@ -11,7 +11,7 @@ struct SelectedPersonSavedHymns : View {
     let savedHymns: [HymnModel]
     
     var body : some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(spacing: 15) {
             if savedHymns.isEmpty {
                 Text("No Saved Hymns")
             } else {
@@ -26,7 +26,7 @@ struct SelectedPersonSavedHymns : View {
 struct SelectedPersonHymnSings : View {
     @EnvironmentObject var personVM: PersonViewModel
     var body : some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(spacing: 15) {
             if personVM.hymnSings.isEmpty {
                 Text("No Hymn Sings")
             } else {
@@ -55,16 +55,18 @@ struct SelectedPersonView: View {
         }
         
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                HStack(spacing: 15) {
-                    AsyncImage(url: URL(string: person.avatar))
-                        .frame(width: 70.0, height: 70.0)
-                        .cornerRadius(.infinity)
-                    Text(person.name).font(.title).bold()
-                    Spacer()
-                }
-                if let bio = person.bio {
-                    Text(bio)
+            VStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 20) {
+                    HStack(spacing: 15) {
+                        AsyncImage(url: URL(string: person.avatar))
+                            .frame(width: 70.0, height: 70.0)
+                            .cornerRadius(.infinity)
+                        Text(person.name).font(.title).bold()
+                        Spacer()
+                    }
+                    if let bio = person.bio {
+                        Text(bio)
+                    }
                 }
                 VStack {
                     Picker("Selection", selection: $selection) {
