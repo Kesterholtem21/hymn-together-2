@@ -55,7 +55,7 @@ class HymnSingViewModel : NSObject, CLLocationManagerDelegate, ObservableObject 
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if manager.authorizationStatus == .authorizedWhenInUse{
+        if manager.authorizationStatus == .authorizedWhenInUse {
             currentLocation = nil
             manager.requestLocation()
         }

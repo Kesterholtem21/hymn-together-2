@@ -85,7 +85,7 @@ struct OnboardingSignup : View {
                     } else {
                         let avatar = GravatarService.getAvatar(email: email)
                         Task {
-                            let person = await BackendService.postPerson(person: PersonModel(name: name, bio: bio, email: email, avatar: avatar))
+                            let person = await BackendService.postPerson(person: PersonModel(name: name, bio: bio.isEmpty ? nil : bio, email: email, avatar: avatar))
                             await MainActor.run {
                                 self.id = person.id
                                 personVM.getPerson(id: id)

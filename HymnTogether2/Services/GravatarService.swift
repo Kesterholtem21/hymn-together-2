@@ -11,7 +11,9 @@ import CryptoKit
 
 class GravatarService {
     private static func md5(_ text: String) -> String {
-        let digest = Insecure.MD5.hash(data: Data(text.utf8))
+        // Normalize the input: lowercase and trim
+        let normalizedText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let digest = Insecure.MD5.hash(data: Data(normalizedText.utf8))
 
         return digest.map {
             String(format: "%02hhx", $0)
