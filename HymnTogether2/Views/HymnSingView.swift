@@ -28,13 +28,17 @@ struct HymnSingView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 15) {
-                    if (searchResults.count > 0) {
+                    if searchResults.count > 0 {
                         ForEach(searchResults) { hymnSing in
                             HymnSingCard(hymnSing: hymnSing)
                         }
                     } else {
-                        ForEach(hymnSingVM.hymnSings) { hymnSing in
-                            HymnSingCard(hymnSing: hymnSing)
+                        if hymnSingVM.hymnSings.count > 0 {
+                            ForEach(hymnSingVM.hymnSings) { hymnSing in
+                                HymnSingCard(hymnSing: hymnSing)
+                            }
+                        } else {
+                            Text("No Hymn Sings")
                         }
                     }
                 }.padding(.horizontal)
@@ -45,6 +49,7 @@ struct HymnSingView: View {
                 leading: PersonAvatar(person: personVM.person, diameter: 25.0),
                 trailing:
                     HStack(spacing: 10) {
+                        AudioControls()
                         NavigationLink {
                             AddHymnSingView()
                         } label: {

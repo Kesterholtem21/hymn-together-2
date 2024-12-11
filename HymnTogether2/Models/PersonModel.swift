@@ -10,7 +10,7 @@ import Foundation
 struct PersonModel : Decodable, Encodable {
     var id: String = ""
     var name: String = ""
-    var bio: String = ""
+    var bio: String? = nil
     var savedHymns: [Int] = []
     var email: String = ""
     var avatar: String = ""

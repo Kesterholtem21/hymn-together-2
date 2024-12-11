@@ -12,8 +12,12 @@ struct SelectedPersonSavedHymns : View {
     
     var body : some View {
         VStack(alignment: .leading, spacing: 15) {
-            ForEach(savedHymns) { hymn in
-                HymnCard(hymn: hymn)
+            if savedHymns.isEmpty {
+                Text("No Saved Hymns")
+            } else {
+                ForEach(savedHymns) { hymn in
+                    HymnCard(hymn: hymn)
+                }
             }
         }
     }
@@ -23,9 +27,13 @@ struct SelectedPersonHymnSings : View {
     @EnvironmentObject var personVM: PersonViewModel
     var body : some View {
         VStack(alignment: .leading, spacing: 15) {
-            ForEach(personVM.hymnSings){ hymnSing in
-                HymnSingCard(hymnSing: hymnSing).onAppear{
-                    print(hymnSing.name)
+            if personVM.hymnSings.isEmpty {
+                Text("No Hymn Sings")
+            } else {
+                ForEach(personVM.hymnSings){ hymnSing in
+                    HymnSingCard(hymnSing: hymnSing).onAppear{
+                        print(hymnSing.name)
+                    }
                 }
             }
         }
@@ -55,8 +63,8 @@ struct SelectedPersonView: View {
                     Text(person.name).font(.title).bold()
                     Spacer()
                 }
-                if !person.bio.isEmpty {
-                    Text(person.bio)
+                if let bio = person.bio {
+                    Text(bio)
                 }
                 VStack {
                     Picker("Selection", selection: $selection) {

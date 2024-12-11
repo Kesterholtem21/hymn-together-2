@@ -41,6 +41,7 @@ struct OnboardingSignup : View {
     @State var name: String = ""
     @State var email: String = ""
     @State var bio: String = ""
+    @State var showAlert: Bool = false
     @AppStorage("id") var id: String = ""
     @EnvironmentObject var personVM: PersonViewModel
     @EnvironmentObject var hymnSingVM: HymnSingViewModel
@@ -52,14 +53,20 @@ struct OnboardingSignup : View {
             Spacer()
             Text("Signup").bold().font(.title)
             VStack(alignment: .leading, spacing: 10) {
-                Text("Name").bold()
+                HStack(spacing: 5) {
+                    Text("Name").bold()
+                    Text("*").foregroundStyle(.red).bold()
+                }
                 ZStack {
                     RoundedRectangle(cornerRadius: 10.0).fill(.gray).opacity(0.1)
                     TextField("Name", text: $name).padding(.horizontal)
                 }.frame(height: 50.0)
             }
             VStack(alignment: .leading, spacing: 10) {
-                Text("Email").bold()
+                HStack(spacing: 5) {
+                    Text("Email").bold()
+                    Text("*").foregroundStyle(.red).bold()
+                }
                 ZStack {
                     RoundedRectangle(cornerRadius: 10.0).fill(.gray).opacity(0.1)
                     TextField("Email", text: $email).padding(.horizontal)
@@ -72,26 +79,32 @@ struct OnboardingSignup : View {
                     TextField("Bio", text: $bio).lineLimit(3).padding(.horizontal)
                 }.frame(height: 50.0)
             }
-            Button {
-                let avatar = GravatarService.getAvatar(email: email)
-                Task {
-                    let person = await BackendService.postPerson(person: PersonModel(name: name, bio: bio, email: email, avatar: avatar))
-                    await MainActor.run {
-                        self.id = person.id
-                        personVM.getPerson(id: id)
-                        personVM.getHymnSings(id: id)
-                        peopleVM.getPeople()
-                        hymnSingVM.getHymnSings()
-                        hymnSingVM.getUserLocation()
-                        dismiss()
+                Button {
+                    if (email.isEmpty || name.isEmpty) {
+                        showAlert = true
+                    } else {
+                        let avatar = GravatarService.getAvatar(email: email)
+                        Task {
+                            let person = await BackendService.postPerson(person: PersonModel(name: name, bio: bio, email: email, avatar: avatar))
+                            await MainActor.run {
+                                self.id = person.id
+                                personVM.getPerson(id: id)
+                                personVM.getHymnSings(id: id)
+                                peopleVM.getPeople()
+                                hymnSingVM.getHymnSings()
+                                hymnSingVM.getUserLocation()
+                                dismiss()
+                            }
+                        }
                     }
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10.0).fill(.blue)
+                        Text("Continue").foregroundStyle(.white).padding(.horizontal)
+                    }.frame(height: 50.0)
+                }.alert(isPresented: $showAlert) {
+                    Alert(title: Text("Complete the required fields"))
                 }
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10.0).fill(.blue)
-                    Text("Continue").foregroundStyle(.white).padding(.horizontal)
-                }.frame(height: 50.0)
-            }
             Spacer()
         }.padding(.horizontal)
     }
