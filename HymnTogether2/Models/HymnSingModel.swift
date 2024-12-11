@@ -52,7 +52,7 @@ struct HymnSingModel : Decodable, Encodable, Identifiable {
         let deltaLong = long2! - long1
         
         let distance = 2 * radius * asin(sqrt(pow(sin(deltaLat/2), 2) + cos(lat1)*cos(lat2!)*pow(sin(deltaLong/2), 2)))
-        
+        print("Hymn Sing name: \(name)  distance: \(distance)")
         return distance
     }
 }

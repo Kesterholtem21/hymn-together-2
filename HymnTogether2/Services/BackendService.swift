@@ -106,7 +106,7 @@ class BackendService {
     }
     
     static func getHymnSings() async -> [HymnSingModel] {
-        let url = URL(string: "https://\(self.API_KEY).mockapi.io/HymnSings?sortBy=date&orderBy=desc")!
+        let url = URL(string: "https://\(self.API_KEY).mockapi.io/HymnSings")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         do {

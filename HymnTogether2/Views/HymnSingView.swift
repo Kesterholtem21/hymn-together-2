@@ -34,8 +34,10 @@ struct HymnSingView: View {
                         }
                     } else {
                         if hymnSingVM.hymnSings.count > 0 {
-                            ForEach(hymnSingVM.hymnSings) { hymnSing in
-                                HymnSingCard(hymnSing: hymnSing)
+                            ForEach(hymnSings) { hymnSing in
+                                HymnSingCard(hymnSing: hymnSing).onAppear{
+                                    print(hymnSing.name)
+                                }
                             }
                         } else {
                             Text("No Hymn Sings")
