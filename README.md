@@ -3,8 +3,8 @@
 Hymn Together is a native iOS app designed as a faith-based alternative to music streaming platforms. It provides access to classic Christian hymns, allowing users to listen to audio recordings, view PDF sheet music, save favorites to playlists, and find nearby hymn sing gatherings with other users.
 
 ## Authors
-[Andrew Foerst]
-[Liam Grossman] 
+[Andrew Foerst](https://github.com/FoerAT21)
+[Liam Grossman](https://github.com/LGmatrix13)
 [Ethan Kesterholt](https://github.com/Kesterholtem21)
 
 
